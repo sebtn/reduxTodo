@@ -1,13 +1,11 @@
 ## TodoApp
 
 ### Tools used: 
-+ nodeJs
-+ git 
-+ webpack 
++ nodeJs				reactJs
++ git						mocha
++ webpack 			karma
++ redux					npm
 + bootstrap 
-+ reactJs
-+ npm
-+ karma 
-+ mocha
+
 
 Author: ** Seb

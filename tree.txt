@@ -1,5 +1,7 @@
 .
 ├── app
+│   ├── actions
+│   │   └── actions.js
 │   ├── api
 │   │   └── TodoApi.js
 │   ├── app.js
@@ -21,6 +23,8 @@
 │   │       ├── todoList.scss
 │   │       └── todo.scss
 │   └── tests
+│       ├── actions
+│       │   └── actions.test.js
 │       ├── api
 │       │   └── todoApi.test.js
 │       └── components
@@ -41,4 +45,4 @@
 ├── tree.txt
 └── webpack.config.js
 
-10 directories, 31 files
+12 directories, 33 files
