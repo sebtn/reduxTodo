@@ -1,0 +1,56 @@
+.search-container {
+	margin:0;
+	padding:0;
+	::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+	    color: $placeholder-letter;
+	}
+	:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+	   color: $placeholder-letter;
+	   opacity:  1;
+	}
+	::-moz-placeholder { /* Mozilla Firefox 19+ */
+	   color: $placeholder-letter;
+	   opacity:  1;
+	}
+	:-ms-input-placeholder { /* Internet Explorer 10-11 */
+	   color: $placeholder-letter;
+	}
+	::-ms-input-placeholder { /* Microsoft Edge */
+	   color: $placeholder-letter;
+	}
+	& .form-group{
+		width: 100%;
+	}
+	& .form-control {
+		margin: 1.25rem 0;
+		outline: none;
+		-webkit-box-shadow: 0 4px 6px -6px $box-shadow-border;
+		-moz-box-shadow: 0 4px 6px -6px $box-shadow-border;
+		box-shadow: 0 4px 6px -6px $box-shadow-border;
+		border: 0;
+		border-bottom: 1px solid $placeholder-letter;
+		min-height: 2.75rem;
+		font-size: 1.5rem;
+			& focus {
+				outline: none;
+				-webkit-box-shadow: 0 4px 6px -6px $box-shadow-border;
+				-moz-box-shadow: 0 4px 6px -6px $box-shadow-border;
+				box-shadow: 0 4px 6px -6px $box-shadow-border;
+				border: 0;
+				border-bottom: 1px solid $placeholder-letter
+			}	
+	}
+	& p.text {
+		padding: 0 0.25rem;
+		vertical-align: middle;
+	}
+	& .form-check {
+		border-bottom: 1px solid lightgrey
+	}
+	& .form-check-input {
+		vertical-align: middle;
+		width:15px;
+		height:15px;
+		padding: 0 0.25rem;
+	}
+}

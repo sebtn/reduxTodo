@@ -1,0 +1,16 @@
+.main-container {
+	margin-top: 5.5rem;
+	& h1 {
+		align-content: center;
+		text-align: center;
+		margin: 2.5rem 0;
+		color: $grey;
+		font-weight: bold;
+	}
+	& .list-container {
+		align-content: center;
+		background-color: $grey-background;	
+
+	}
+
+}
