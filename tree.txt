@@ -11,6 +11,8 @@
 │   │   ├── Todo.js
 │   │   ├── TodoList.js
 │   │   └── TodoSearch.js
+│   ├── reducers
+│   │   └── reducers.js
 │   ├── styles
 │   │   ├── app.scss
 │   │   ├── base
@@ -27,14 +29,16 @@
 │       │   └── actions.test.js
 │       ├── api
 │       │   └── todoApi.test.js
-│       └── components
-│           ├── addTodo.test.js
-│           ├── app.test.js
-│           ├── test_index.js
-│           ├── todoApp.test.js
-│           ├── todoList.test.js
-│           ├── todoSearch.test.js
-│           └── todo.test.js
+│       ├── components
+│       │   ├── addTodo.test.js
+│       │   ├── app.test.js
+│       │   ├── test_index.js
+│       │   ├── todoApp.test.js
+│       │   ├── todoList.test.js
+│       │   ├── todoSearch.test.js
+│       │   └── todo.test.js
+│       └── reducers
+│           └── reducers.test.js
 ├── karma.conf.js
 ├── package.json
 ├── public
@@ -45,4 +49,4 @@
 ├── tree.txt
 └── webpack.config.js
 
-12 directories, 33 files
+14 directories, 35 files
