@@ -1,7 +1,10 @@
 import expect from 'expect'
-import {setSearchText} from '../../actions/actions'
-
+/*Import all as actions so we can use the "alias" actions*/
 import * as actions from '../../actions/actions'
+import {setSearchText, 
+	addTodo, 
+	toggleShowCompleted, 
+	toggleTodo}  from '../../actions/actions'
 
 describe('Actions Testing', () => {
 

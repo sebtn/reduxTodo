@@ -12,13 +12,18 @@ import AddTodo from '../../components/AddTodo'
 import TodoSearch from '../../components/TodoSearch'
 import TodoApi from '../../api/TodoApi'
 
-/*Import actions as actions so we can use the "alias" actions*/
+/*Import all as actions so we can use the "alias" actions*/
 import * as actions from '../../actions/actions'
 import {setSearchText, 
 	addTodo, 
 	toggleShowCompleted, 
 	toggleTodo}  from '../../actions/actions'
 
+/*import reducers*/
+import df from 'deep-freeze-strict'
+import * as reducers from '../../reducers/reducers'
+import {searchTextReducer,
+	showCompletedReducer} from '../../reducers/reducers'
 
 'use strict'
 /*require all modules ending in "_test" from the
@@ -357,5 +362,41 @@ describe('Actions Testing', () => {
 
 		expect(response).toEqual(completedAction)
 	})	
+
+})
+
+/*--------------------------------------------------------------*/
+/*Testing actions*/
+describe('Reducers testing', () => {
+
+	describe('searchText reducer testing', () => {
+
+		it('Test #1: it should update searchText when action called', () => {
+			let action = {
+				type: "SET_SEARCH_TEXT",
+				searchText: "Cat"
+			}
+			/*response is the state*/
+			let response = reducers.searchTextReducer(df(''), df(action))
+			/*Assert both states are equal*/
+			expect(response).toEqual(action.searchText)
+		})
+
+	})
+
+	describe('showCompletedReducer testing', () => {
+
+		it('Test #1: it should update state when action called', () => {
+			let action = {
+				type: "TOOGLE_SHOW_COMPLETED",
+				showCompleted: true,
+			}
+			/*response is the state*/
+			let response = reducers.showCompletedReducer(df({showCompleted: false}), df(action))
+			/*Assert both states are equal*/
+			expect(response.showCompleted).toEqual(action.showCompleted)
+		})
+
+	})
 
 })
