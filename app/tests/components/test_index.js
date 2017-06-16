@@ -23,7 +23,10 @@ import {setSearchText,
 import df from 'deep-freeze-strict'
 import * as reducers from '../../reducers/reducers'
 import {searchTextReducer,
-	showCompletedReducer} from '../../reducers/reducers'
+	showCompletedReducer, 
+	addTodoReducer} from '../../reducers/reducers'
+import uuid from 'node-uuid'
+import moment from 'moment'
 
 'use strict'
 /*require all modules ending in "_test" from the
@@ -396,6 +399,41 @@ describe('Reducers testing', () => {
 			/*Assert both states are equal*/
 			expect(response.showCompleted).toEqual(action.showCompleted)
 		})
+
+	})
+
+	describe('addTodoReducer Testing', () => {
+
+		it('Test #1: it should add todo when action called', () => {
+			let action = {
+				type: "ADD_TODO",
+				text: "I like cats"
+			}
+			let response = reducers.addTodoReducer( df([]), df(action) )
+			
+			expect(response.length).toEqual(1)
+			expect(response[0].text).toEqual(action.text)
+		})
+
+		it('Test #2: it should toggle todo when action called', () => {
+			let action =  {
+				type: "TOGGLE_TODO",
+				id: 1,
+			}
+			let todos = [{	
+				id: 1,
+				completed: true, 
+				completedAt: 130, 
+				text: "I like my cat", 
+				createdAt: 125 
+				}
+			]
+			let response = reducers.addTodoReducer( df(todos), df(action) )
+
+			expect(response[0].completed).toEqual(false)
+			expect(response[0].completedAt).toEqual(undefined)	
+		})
+
 
 	})
 

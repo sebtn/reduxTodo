@@ -32,8 +32,13 @@ export default class TodoApp extends Component {
 			todos: 
 			[
 				...this.state.todos, 
-				{ id: uuid(), text: text, completed: false, 
-					createdAt: moment().unix(), completedAt: undefined }
+				{ 
+					id: uuid(), 
+					text: text,
+					completed: false, 
+					createdAt: moment().unix(), 
+					completedAt: undefined 
+				}
 			],
 		})
 	}
