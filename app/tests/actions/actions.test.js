@@ -1,6 +1,6 @@
 import expect from 'expect'
 /*Import all as actions so we can use the "alias" actions*/
-import * as actions from '../../actions/actions'
+import * as actions from './../actions/actions'
 import {setSearchText, 
 	addTodo, 
 	toggleShowCompleted, 

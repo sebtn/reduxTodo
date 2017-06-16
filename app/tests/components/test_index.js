@@ -24,7 +24,7 @@ import df from 'deep-freeze-strict'
 import * as reducers from '../../reducers/reducers'
 import {searchTextReducer,
 	showCompletedReducer, 
-	addTodoReducer} from '../../reducers/reducers'
+	todosReducer} from '../../reducers/reducers'
 import uuid from 'node-uuid'
 import moment from 'moment'
 
@@ -391,13 +391,12 @@ describe('Reducers testing', () => {
 
 		it('Test #1: it should update state when action called', () => {
 			let action = {
-				type: "TOOGLE_SHOW_COMPLETED",
-				showCompleted: true,
+				type: "TOGGLE_SHOW_COMPLETED",
 			}
 			/*response is the state*/
-			let response = reducers.showCompletedReducer(df({showCompleted: false}), df(action))
+			let response = reducers.showCompletedReducer(df(false), df(action))
 			/*Assert both states are equal*/
-			expect(response.showCompleted).toEqual(action.showCompleted)
+			expect(response).toEqual(true)
 		})
 
 	})
@@ -409,7 +408,7 @@ describe('Reducers testing', () => {
 				type: "ADD_TODO",
 				text: "I like cats"
 			}
-			let response = reducers.addTodoReducer( df([]), df(action) )
+			let response = reducers.todosReducer( df([]), df(action) )
 			
 			expect(response.length).toEqual(1)
 			expect(response[0].text).toEqual(action.text)
@@ -428,7 +427,7 @@ describe('Reducers testing', () => {
 				createdAt: 125 
 				}
 			]
-			let response = reducers.addTodoReducer( df(todos), df(action) )
+			let response = reducers.todosReducer( df(todos), df(action) )
 
 			expect(response[0].completed).toEqual(false)
 			expect(response[0].completedAt).toEqual(undefined)	

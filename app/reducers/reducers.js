@@ -12,18 +12,16 @@ export let searchTextReducer = (state = '', action) => {
 	}
 }
 
-export let showCompletedReducer = (state = {showCompleted: false}, action) => {
+export let showCompletedReducer = (state = false, action) => {
 	switch (action.type) {
-		case "TOOGLE_SHOW_COMPLETED":
-			return {
-				showCompleted: true,
-			}
+		case "TOGGLE_SHOW_COMPLETED":
+			return !state
 		default: 
 			return state			
 	}
 }			
 
-export let addTodoReducer = (state = [],  action) => {
+export let todosReducer = (state = [],  action) => {
 	switch (action.type) {
 		case "ADD_TODO":
 			return [
