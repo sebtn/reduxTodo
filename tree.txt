@@ -13,6 +13,8 @@
 │   │   └── TodoSearch.js
 │   ├── reducers
 │   │   └── reducers.js
+│   ├── store
+│   │   └── configureStore.js
 │   ├── styles
 │   │   ├── app.scss
 │   │   ├── base
@@ -49,4 +51,4 @@
 ├── tree.txt
 └── webpack.config.js
 
-14 directories, 35 files
+15 directories, 36 files
