@@ -11,22 +11,17 @@ import TodoApp from '../../components/TodoApp'
 import AddTodo from '../../components/AddTodo'
 import TodoSearch from '../../components/TodoSearch'
 import TodoApi from '../../api/TodoApi'
+import uuid from 'node-uuid'
+import moment from 'moment'
 
 /*Import all as actions so we can use the "alias" actions*/
 import * as actions from '../../actions/actions'
-import {setSearchText, 
-	addTodo, 
-	toggleShowCompleted, 
-	toggleTodo}  from '../../actions/actions'
+import {setSearchText, addTodo, toggleShowCompleted, toggleTodo}  from '../../actions/actions'
 
 /*import reducers*/
 import df from 'deep-freeze-strict'
 import * as reducers from '../../reducers/reducers'
-import {searchTextReducer,
-	showCompletedReducer, 
-	todosReducer} from '../../reducers/reducers'
-import uuid from 'node-uuid'
-import moment from 'moment'
+import {searchTextReducer,showCompletedReducer, todosReducer} from '../../reducers/reducers'
 
 'use strict'
 /*require all modules ending in "_test" from the
