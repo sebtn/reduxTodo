@@ -364,7 +364,7 @@ describe('Actions Testing', () => {
 })
 
 /*--------------------------------------------------------------*/
-/*Testing actions*/
+/*Testing reducers*/
 describe('Reducers testing', () => {
 
 	describe('searchText reducer testing', () => {
@@ -427,7 +427,6 @@ describe('Reducers testing', () => {
 			expect(response[0].completed).toEqual(false)
 			expect(response[0].completedAt).toEqual(undefined)	
 		})
-
 
 	})
 
