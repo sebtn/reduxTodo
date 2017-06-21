@@ -23,10 +23,17 @@ export default class AddTodo extends Component {
 	render() {
 		return(
 			<div className="add-todo-container">
-				<form className="Add-todo-form" onSubmit={this.onSubmit} >
+				<form className="Add-todo-form" 
+					onSubmit={this.onSubmit} >
 				  <div className="form-group">
-				    <input  type="text" className="form-control" ref="todoPassed" placeholder="Write todo" />
-				    <button type="submit" className="btn btn-primary btn-lg" >Add Todo</button>
+				    <input  type="text" 
+					    className="form-control"
+					     ref="todoPassed" 
+					     placeholder="Write todo" />
+				    <button type="submit" 
+					    className="btn btn-primary btn-lg" >
+					    Add Todo
+				    </button>
 				  </div>
 				</form>				  
 			</div>

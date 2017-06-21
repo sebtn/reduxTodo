@@ -1,4 +1,4 @@
-// import redux from 'redux'
+import {combineReducers} from 'redux'
 let redux = require('redux')
 
 import {searchTextReducer,
@@ -9,7 +9,7 @@ export let configure = () => {
 	let reducer = redux.combineReducers({
 		searchText: searchTextReducer,
 		showCompleted: showCompletedReducer,
-		addTodo: todosReducer
+		todos: todosReducer
 	})
 	 let store = redux.createStore(reducer, redux.compose(
 			window.devToolsExtension ? window.devToolsExtension() : f => f 

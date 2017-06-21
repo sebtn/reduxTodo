@@ -19,4 +19,10 @@ store.dispatch(actions.toggleShowCompleted() )
 store.dispatch(actions.setSearchText('yard'))
 store.dispatch(actions.toggleShowCompleted() )
 
-ReactDOM.render(<TodoApp />, document.getElementById('root'))
+// ReactDOM.render(<TodoApp />, document.getElementById('root'))
+
+ReactDOM.render(
+	<Provider store={store}>
+		<TodoApp />
+	</Provider>,
+ document.getElementById('root'))

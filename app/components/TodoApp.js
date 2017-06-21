@@ -11,8 +11,8 @@ import TodoApi from '../api/TodoApi'
 'use strict'
 
 export default class TodoApp extends Component {
-	constructor(props) {
-		super(props)
+	constructor() {
+		super()
 		this.state = {
 			showCompleted: false,
 			searchText: '',
@@ -42,19 +42,19 @@ export default class TodoApp extends Component {
 componentWillUpdate(nextProps, nextState) {
 
 
-}
+} 
 
 /*--------------------------------------------------------------*/
-handleToggle = (id) => {
-	let updatedTodos = this.state.todos.map( (todo) => {
-		if (todo.id === id) { 
-			todo.completed = !todo.completed 
-			todo.completedAt = todo.completed ?  moment().unix() : undefined
-		}
-		return todo
-	})
-	this.setState({todos: updatedTodos})
-}
+// handleToggle = (id) => {
+// 	let updatedTodos = this.state.todos.map( (todo) => {
+// 		if (todo.id === id) { 
+// 			todo.completed = !todo.completed 
+// 			todo.completedAt = todo.completed ?  moment().unix() : undefined
+// 		}
+// 		return todo
+// 	})
+// 	this.setState({todos: updatedTodos})
+// }
 
 /*--------------------------------------------------------------*/
 handleSearch = (showCompleted, searchText) => {
@@ -74,9 +74,11 @@ handleSearch = (showCompleted, searchText) => {
 				<div className="row">
 					<div className="col-sm-1 col-md-1 col-lg-3"></div>
 					<div className="col-sm-10 col-md-10 col-lg-6 list-container">
-						<TodoSearch onSearch={this.handleSearch}/>
-						<TodoList todos={filteredTodos} 
-							onToggle={this.handleToggle} />
+						<TodoSearch onSearch={this.handleSearch} />
+						<TodoList 
+							// todos={filteredTodos} 
+							// onToggle={this.handleToggle} 
+						/> 
 						<AddTodo onSetText={this.handlerAddTodo} />
 					</div>
 					<div className="col-sm-1 col-md-1 col-lg-3"></div>
