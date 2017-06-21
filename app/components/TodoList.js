@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 
 import Todo from './Todo'
 
-class TodoList extends Component {
+export class TodoList extends Component {
 /*--------------------------------------------------------------*/
 	renderTodos = () => {
 		let {todos} = this.props

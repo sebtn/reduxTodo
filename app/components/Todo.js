@@ -9,7 +9,7 @@ import * as actions from '../actions/actions'
 
 
 'use strict'
-class Todo extends Component {
+export class Todo extends Component {
 render() {
 	let {createdAt, completedAt, completed, text, id, dispatch} = this.props
 	let todoClassName = completed ? 'todo todo-completed' : 'todo'

@@ -3,10 +3,13 @@ import ReactDOM from 'react-dom'
 import expect from 'expect'
 import TestUtils from 'react-addons-test-utils'
 import $ from 'jquery'
+import {Provider} from 'react-redux'
 
-/*Import components*/
-import Todo from '../../components/Todo'
+/*Import components commented out are before redux*/
+// import Todo from '../../components/Todo'
+import connectedTodo, {Todo} from '../../components/Todo'
 import TodoList from '../../components/TodoList'
+// import connectedTodoList, {TodoList} from '../../components/TodoList'
 import TodoApp from '../../components/TodoApp'
 import AddTodo from '../../components/AddTodo'
 import TodoSearch from '../../components/TodoSearch'
@@ -22,6 +25,10 @@ import {setSearchText, addTodo, toggleShowCompleted, toggleTodo}  from '../../ac
 import df from 'deep-freeze-strict'
 import * as reducers from '../../reducers/reducers'
 import {searchTextReducer,showCompletedReducer, todosReducer} from '../../reducers/reducers'
+
+/*import store*/
+let configureStore = require('../../store/configureStore')
+import {configure} from '../../store/configureStore'
 
 'use strict'
 /*require all modules ending in "_test" from the
@@ -146,20 +153,26 @@ describe('Component Todo', () => {
 		expect(Todo).toExist()
 	})
 
-	it('Test #2: it should call onToggle prop with OnClick', () => {
+	// it('Test #2: it should call onToggle prop with OnClick', () => {
+	it('Test #2: (after redux) should dispatch TOGGLE_TODO action onClick', () => {
 		let todoDummy = {
 			id: 155,
 			text: 'Some text here',
 			completed: true
 		}
 		let spy = expect.createSpy()
-		let todoComponent = TestUtils.renderIntoDocument(<Todo {...todoDummy} onToggle={spy} />)
+		// let todoComponent = TestUtils.renderIntoDocument(<Todo {...todoDummy} onToggle={spy} />)
+		let todoComponent = TestUtils.renderIntoDocument(<Todo {...todoDummy} dispatch={spy}/>)
 		let $el = $(ReactDOM.findDOMNode(todoComponent))
 		/*verify OnClick is getting passed from the first div 
 		in the component*/
 		TestUtils.Simulate.click($el[0])
 		/*passing id onToggle using the spread to inject the props in the component*/
-		expect(spy).toHaveBeenCalledWith(155)
+		// expect(spy).toHaveBeenCalledWith(155)
+		expect(spy).toHaveBeenCalledWith({
+			type: 'TOGGLE_TODO',
+			id: todoDummy.id
+		})
 	})
 
 })
@@ -172,16 +185,44 @@ describe('Component TodoList', () => {
 		expect(TodoList).toExist()
 	})
 
-	it('Test #2: should render one Todo for each item in TodoList array', () => {
-		let todos = [
-			{id:1, text:'Some text for item 1'},
-			{id:2, text:'some text for item 2' }
-		]
-		/*from dom */
-		let todoList = TestUtils.renderIntoDocument(<TodoList todos={todos} />)
-		let todosRendered = TestUtils.scryRenderedComponentsWithType(todoList, Todo)
+	// it('Test #2: should render one Todo for each item in TodoList array', () => {
+	// 	let todos = [
+	// 		{id:1, text:'Some text for item 1'},
+	// 		{id:2, text:'some text for item 2' }
+	// 	]
+	// 	/*from dom */
+	// 	let todoList = TestUtils.renderIntoDocument(<TodoList todos={todos} />)
+	// 	let todosRendered = TestUtils.scryRenderedComponentsWithType(todoList, Todo)
 
-		expect(todos.length).toBe(todosRendered.length)
+	// 	expect(todos.length).toBe(todosRendered.length)
+	// })
+	
+		it('Test#2: (after redux) should render one Todo for each item in array', () => {
+			let todos = [{
+					id:1, 
+					text:'Some text for item 1', 
+					completed: false, 
+					completedAt: undefined, 
+					createdAt: 500 
+				}, {
+					id:2, 
+					text:'some text for item 2', 
+					completed: false, 
+					completedAt: undefined, 
+					createdAt: 500 
+				}
+			]
+
+			let store = configure({todos: todos})
+			let provider = TestUtils.renderIntoDocument(
+				<Provider store={store}>
+					<TodoList />
+				</Provider>
+			)
+			let todoList = TestUtils.scryRenderedComponentsWithType(provider, TodoList)[0]
+			let todosComponents = TestUtils.scryRenderedComponentsWithType(todoList, Todo)
+
+			expect(todos.length).toBe(todosComponents.length)
 	})
 
 })
@@ -194,7 +235,21 @@ describe('Component TodoApp', () => {
 		expect(TodoApp).toExist()
 	})
 
-	it('Test #2: it should add item to todoState using hanldeAddTodo', () => {
+	it('Test #1: (after redux) should render TodoList', () => {
+		let store = configure()
+		let provider = TestUtils.renderIntoDocument(
+			<Provider store={store}>
+				<TodoApp />
+			</Provider>
+		)
+		let todoApp = TestUtils.scryRenderedComponentsWithType(provider, TodoApp)[0]
+		let todoList =  TestUtils.scryRenderedComponentsWithType(todoApp, TodoList)
+
+		expect(todoList.length).toEqual(1)
+	})
+
+/*Commented after redux implemented */
+/*	it('Test #2: it should add item to todoState using hanldeAddTodo', () => {
 		let todoText = 'Test text'
 		let todoAppMock = TestUtils.renderIntoDocument(<TodoApp />)
 
@@ -250,7 +305,7 @@ describe('Component TodoApp', () => {
 		todoApp.handleToggle(todoDummy.id)
 		expect(todoApp.state.todos[0].completed).toBe(false)
 		expect(todoApp.state.todos[0].completedAt).toNotExist()
-	})
+	})*/
 
 })
 
