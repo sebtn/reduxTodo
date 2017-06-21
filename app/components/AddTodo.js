@@ -17,7 +17,8 @@ export class AddTodo extends Component {
 			note that it is not defined, it is just declared*/
 			this.refs.todoPassed.value = ' '
 			/* this.props.onSetText(text)
-			changed the cb for the method inside the todosReducer */			dispatch(actions.addTodo(text))
+			changed the cb for the method inside the todosReducer */			
+			dispatch(actions.addTodo(text))
 		} else {
 			this.refs.todoPassed.focus()
 		}

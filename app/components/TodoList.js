@@ -3,11 +3,12 @@ import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 
 import Todo from './Todo'
+import TodoApi from '../api/TodoApi'
 
 export class TodoList extends Component {
 /*--------------------------------------------------------------*/
 	renderTodos = () => {
-		let {todos} = this.props
+		let {todos, showCompleted, searchText} = this.props
 		if (todos.length === 0) {
 			return (
 				<div className="message-empty">
@@ -20,12 +21,13 @@ export class TodoList extends Component {
 			)
 		}
 		/*Map all the 'todos' array, which is being passed as prop*/
-		return todos.map( (todo) => {
+		// return todos.map( (todo) => {
+		return TodoApi.filterTodos(todos, showCompleted, searchText).map( (todo) => {
 			return (
 				<Todo 
-				key={todo.id} 
-				 // onToggle={this.props.onToggle} 
-				{...todo}
+					key={todo.id} 
+					 // onToggle={this.props.onToggle} 
+					{...todo}
 			 />
 			)
 		})
@@ -49,8 +51,6 @@ export class TodoList extends Component {
 
 export default connect(
 		(state) => {
-			return {
-				todos: state.todos
-			}
+			return state
 		}
 	)(TodoList)

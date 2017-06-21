@@ -13,7 +13,8 @@ import TodoList from '../../components/TodoList'
 import TodoApp from '../../components/TodoApp'
 // import AddTodo from '../../components/AddTodo'
 import {AddTodo} from '../../components/AddTodo'
-import TodoSearch from '../../components/TodoSearch'
+import {TodoSearch} from '../../components/TodoSearch'
+// import TodoSearch from '../../components/TodoSearch'
 import TodoApi from '../../api/TodoApi'
 import uuid from 'node-uuid'
 import moment from 'moment'
@@ -329,16 +330,16 @@ describe('Component ToDo ', () => {
 	})	*/
 
 	it('Test #2: (after redux) should dispatch ADD_TODO  when valid text', () => {
-		let todoPassed = 'Defined string'
+		let searchText = 'Defined string'
 			var action = {
 				type: 'ADD_TODO',
-				text: todoPassed
+				text: searchText
 			}
 			let spy = expect.createSpy()
 			let textInForm = TestUtils.renderIntoDocument(<AddTodo dispatch={spy} />)
 			let $el = $(ReactDOM.findDOMNode(textInForm))
 
-			textInForm.refs.todoPassed.value = todoPassed
+			textInForm.refs.todoPassed.value = searchText
 			TestUtils.Simulate.submit($el.find('form')[0])
 
 			expect(spy).toHaveBeenCalledWith(action)
@@ -366,26 +367,39 @@ describe('Component TodoSearch exists', () => {
 		expect(TodoSearch).toBe(TodoSearch)
 	})
 
-	it('test #2: onSearch should get called with input text on search bar', () => {
-		let spy = expect.createSpy()
-		let todoSearch = TestUtils.renderIntoDocument(<TodoSearch onSearch={spy} />)
+	// it('test #2: onSearch should get called with input text on search bar', () => {
+	it('test #2: (after redux) should dispatch "SET_SEARCH_TEXT" on input change', () => {
 		let searchText = 'Acid test'
+		let action = {
+			type: "SET_SEARCH_TEXT",
+			searchText: searchText
+		}
+		let spy = expect.createSpy()
+		// let todoSearch = TestUtils.renderIntoDocument(<TodoSearch onSearch={spy} />)
+		let todoSearch = TestUtils.renderIntoDocument(<TodoSearch dispatch={spy} />)
 
 		todoSearch.refs.searchText.value = searchText
 		TestUtils.Simulate.change(todoSearch.refs.searchText)
 
-		expect(spy).toHaveBeenCalledWith(false, 'Acid test')
+		// expect(spy).toHaveBeenCalledWith(false, 'Acid test')
+		expect(spy).toHaveBeenCalledWith(action)
 	})
 
-	it('test #3: should called onSearch with proper value ', () => {
+	// it('test #3: it should called onSearch when check box is used ', () => {
+	it('test #3: (after redux) it should dispatch "TOGGLE_SHOW_COMPLETED" on checkbox checked ', () => {
+		let action = {
+			type: "TOGGLE_SHOW_COMPLETED"
+		}
 		let spy = expect.createSpy()
-		let todoSearch = TestUtils.renderIntoDocument(<TodoSearch onSearch={spy} />)
+		// let todoSearch = TestUtils.renderIntoDocument(<TodoSearch onSearch={spy} />)
+		let todoSearch = TestUtils.renderIntoDocument(<TodoSearch dispatch={spy} />)
 		let showCompleted = false
 
 		todoSearch.refs.showCompleted.checked = showCompleted
 		TestUtils.Simulate.change(todoSearch.refs.showCompleted)
 
-		expect(spy).toHaveBeenCalledWith(false, '')
+		// expect(spy).toHaveBeenCalledWith(false, '')
+		expect(spy).toHaveBeenCalledWith(action)
 	})
 
 })	
