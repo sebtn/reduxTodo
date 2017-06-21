@@ -11,7 +11,8 @@ import connectedTodo, {Todo} from '../../components/Todo'
 import TodoList from '../../components/TodoList'
 // import connectedTodoList, {TodoList} from '../../components/TodoList'
 import TodoApp from '../../components/TodoApp'
-import AddTodo from '../../components/AddTodo'
+// import AddTodo from '../../components/AddTodo'
+import {AddTodo} from '../../components/AddTodo'
 import TodoSearch from '../../components/TodoSearch'
 import TodoApi from '../../api/TodoApi'
 import uuid from 'node-uuid'
@@ -220,9 +221,9 @@ describe('Component TodoList', () => {
 				</Provider>
 			)
 			let todoList = TestUtils.scryRenderedComponentsWithType(provider, TodoList)[0]
-			let todosComponents = TestUtils.scryRenderedComponentsWithType(todoList, Todo)
+			let todosRendered = TestUtils.scryRenderedComponentsWithType(todoList, Todo)
 
-			expect(todos.length).toBe(todosComponents.length)
+			expect(todos.length).toBe(todosRendered.length)
 	})
 
 })
@@ -316,8 +317,7 @@ describe('Component ToDo ', () => {
 	it('Test #1: Component AddToDo should exist', () => {
 		expect(AddTodo).toExist()
 	})
-
-	it('Test #2: onSetText should accept only defined strings', () => {
+/*	it('Test #2: onSetText should accept only defined strings', () => {
 		let spy = expect.createSpy()
 		let textInForm = TestUtils.renderIntoDocument(<AddTodo onSetText={spy} />)
 		let $el = $(ReactDOM.findDOMNode(textInForm))
@@ -326,11 +326,29 @@ describe('Component ToDo ', () => {
 		TestUtils.Simulate.submit($el.find('form')[0])
 
 		expect(spy).toHaveBeenCalledWith('Defined string')
-	})
+	})	*/
 
-	it('Test #3: onSetText should NOT accept undefined strings', () => {
+	it('Test #2: (after redux) should dispatch ADD_TODO  when valid text', () => {
+		let todoPassed = 'Defined string'
+			var action = {
+				type: 'ADD_TODO',
+				text: todoPassed
+			}
+			let spy = expect.createSpy()
+			let textInForm = TestUtils.renderIntoDocument(<AddTodo dispatch={spy} />)
+			let $el = $(ReactDOM.findDOMNode(textInForm))
+
+			textInForm.refs.todoPassed.value = todoPassed
+			TestUtils.Simulate.submit($el.find('form')[0])
+
+			expect(spy).toHaveBeenCalledWith(action)
+		})
+
+	// it('Test #3: onSetText should NOT accept undefined strings', () => {
+	it('Test #3: (after redux) should not dispatch ADD_TODO when valid text', () => {
 		let spy = expect.createSpy()
-		let textInForm = TestUtils.renderIntoDocument(<AddTodo onSetText={spy} />)
+		// let textInForm = TestUtils.renderIntoDocument(<AddTodo onSetText={spy} />)
+		let textInForm = TestUtils.renderIntoDocument(<AddTodo dispatch={spy} />)
 		let $el = $(ReactDOM.findDOMNode(textInForm))
 
 		textInForm.refs.todoPassed.value = ''
@@ -338,7 +356,6 @@ describe('Component ToDo ', () => {
 
 		expect(spy).toNotHaveBeenCalled()
 	})
-
 })
 
 /*--------------------------------------------------------------*/

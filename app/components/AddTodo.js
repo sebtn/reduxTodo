@@ -1,19 +1,23 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
+import {connect} from 'react-redux'
+import * as actions from '../actions/actions'
 
 'use strict'
 
-export default class AddTodo extends Component {
+export class AddTodo extends Component {
 
 /*-----------------------------------------------------------------*/
 	onSubmit = (e) => {
 		e.preventDefault()
+		let {dispatch} = this.props
 		let text = this.refs.todoPassed.value
 		if (text.length > 0 ) {
 			/*this fires up the callback ```onSetText``` to parent
 			note that it is not defined, it is just declared*/
 			this.refs.todoPassed.value = ' '
-			this.props.onSetText(text)
+			/* this.props.onSetText(text)
+			changed the cb for the method inside the todosReducer */			dispatch(actions.addTodo(text))
 		} else {
 			this.refs.todoPassed.focus()
 		}
@@ -43,3 +47,7 @@ export default class AddTodo extends Component {
 		)	
 	}
 }
+/*-----------------------------------------------------------------*/
+/*Add todo doesn't need  props from the state obj 
+there is no need to reference anything inside connect*/
+export default connect()(AddTodo)
