@@ -14,10 +14,7 @@ let unsubscribe = store.subscribe(() =>
   console.log(store.getState())
 )
 
-store.dispatch(actions.addTodo('Clean the yard'))
-store.dispatch(actions.toggleShowCompleted() )
-store.dispatch(actions.setSearchText('yard'))
-store.dispatch(actions.toggleShowCompleted() )
+
 
 // ReactDOM.render(<TodoApp />, document.getElementById('root'))
 

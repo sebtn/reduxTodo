@@ -32,15 +32,16 @@ export class TodoSearch extends Component {
 					    	dispatch( actions.setSearchText(searchText) )
 					    }} />
 				    <div className="form-check">
-					    <label className="form-check-label">
+					    <label className="custom-control custom-checkbox">
 				        <input ref="showCompleted" 
 				        	checked={showCompleted}
-					        className="form-check-input" 
+					        className="custom-control-input" 
 					        type="checkbox" 
 					        onChange={ () => {
 							    	dispatch( actions.toggleShowCompleted() )
 					        }} />
-				        <p className="text">Show completed todos </p>
+					        <span className="custom-control-indicator"></span>
+					        <span className="custom-control-description">Show completed ...</span>
 					    </label>
 				    </div>
 				</div>
