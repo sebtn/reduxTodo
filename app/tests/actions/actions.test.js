@@ -47,4 +47,20 @@ describe('Actions Testing', () => {
 		expect(response).toEqual(completedAction)
 	})	
 
+	it('Test #5: it should generate Todos action object', () => {
+		let todos = [{
+			id: 111,
+			text: 'anything',
+			completed: false,
+			completedAt: undefined,
+			createdAt: 15000,
+		}]
+		let completedAction = {
+			type: "ADD_TODOS",
+			todos
+		}
+		let response =  actions.addTodos(completedAction)
+		expect(response).toEqual(completedAction)
+	})
+
 })

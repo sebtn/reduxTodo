@@ -64,6 +64,24 @@ describe('Reducers testing', () => {
 			expect(response[0].completedAt).toEqual(undefined)
 		})
 
+		it('Test #3: it should add existing todos', () => {
+			let todos = [{
+				id: 111,
+				text: 'anything',
+				completed: false,
+				completedAt: undefined,
+				createdAt: 15000,
+			}]
+			let completedAction = {
+				type: "ADD_TODOS",
+				todos
+			}
+
+			let response = reducers.todosReducer( df([]), df(action) )
+
+			expect(response.length).toEqual(1)
+			expect(response[0]).toEqual(todos[0])
+		})
 
 	})
 

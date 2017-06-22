@@ -5,13 +5,25 @@ import {Provider} from 'react-redux'
 import TodoApp from '././components/TodoApp'
 import  '././styles/app.scss' 
 import * as actions from '././actions/actions'
-// import  {configure}  from '././store/configureStore'
+import TodoApi from '././api/TodoApi'
+
+
 let store = require('././store/configureStore').configure()
+
+store.subscribe( () => {
+  let state = store.getState() 
+  console.log('New state: ', state)
+  TodoApi.setTodos(state.todos)
+}) 
+
+/* action to add the todo arrays */
+let initialTodos = TodoApi.getTodos()
+store.dispatch(actions.addTodos(initialTodos))
 
 'use strict'
 
 ReactDOM.render(
-	<Provider store={store}>
-		<TodoApp />
-	</Provider>,
+  <Provider store={store}>
+    <TodoApp />
+  </Provider>,
  document.getElementById('root'))

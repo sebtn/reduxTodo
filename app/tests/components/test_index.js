@@ -186,18 +186,6 @@ describe('Component TodoList', () => {
 	it('Test #1: Component TodoList should exist', () =>  {
 		expect(TodoList).toExist()
 	})
-
-	// it('Test #2: should render one Todo for each item in TodoList array', () => {
-	// 	let todos = [
-	// 		{id:1, text:'Some text for item 1'},
-	// 		{id:2, text:'some text for item 2' }
-	// 	]
-	// 	/*from dom */
-	// 	let todoList = TestUtils.renderIntoDocument(<TodoList todos={todos} />)
-	// 	let todosRendered = TestUtils.scryRenderedComponentsWithType(todoList, Todo)
-
-	// 	expect(todos.length).toBe(todosRendered.length)
-	// })
 	
 		it('Test#2: (after redux) should render one Todo for each item in array', () => {
 			let todos = [{
@@ -250,65 +238,6 @@ describe('Component TodoApp', () => {
 		expect(todoList.length).toEqual(1)
 	})
 
-/*Commented after redux implemented */
-/*	it('Test #2: it should add item to todoState using hanldeAddTodo', () => {
-		let todoText = 'Test text'
-		let todoAppMock = TestUtils.renderIntoDocument(<TodoApp />)
-
-		todoAppMock.setState({ todos: [] })
-		todoAppMock.handlerAddTodo(todoText)
-
-		expect(todoAppMock.state.todos[0].text).toBe(todoText)
-	})
-
-	it('Test #3: handleToggle method should toggle completed prop', () => {
-		let todoDummy = {
-			id: 15,
-			text: 'Some text here',
-			completed: false 
-		}
-		let todoApp = TestUtils.renderIntoDocument(<TodoApp />)
-		todoApp.setState({todos: [todoDummy] })
-
-		expect(todoApp.state.todos[0].completed).toBe(false)
-		todoApp.handleToggle(todoDummy.id)		
-		expect(todoApp.state.todos[0].completed).toBe(true)
-	})
-
-	it('Test# 4: handleToggle method should toggle completed', () => {
-		let todoDummy = {
-			id: 15,
-			text: 'Some text here',
-			completed: false,
-			createdAt: 0,
-			completedAt: undefined
-		}
-		let todoApp = TestUtils.renderIntoDocument(<TodoApp />)
-		todoApp.setState({todos: [todoDummy] })
-
-		expect(todoApp.state.todos[0].completed).toBe(false)
-		todoApp.handleToggle(todoDummy.id)
-		expect(todoApp.state.todos[0].completed).toBe(true)
-		expect(todoApp.state.todos[0].completedAt).toBeA('number')
-	})
-
-	it('Test# 5: handleToggle method should toggle completed to incomplete', () => {
-		let todoDummy = {
-			id: 15,
-			text: 'Some text here',
-			completed: true,
-			createdAt: 0,
-			completedAt: 1233
-		}
-		let todoApp = TestUtils.renderIntoDocument(<TodoApp />)
-		todoApp.setState({todos: [todoDummy] })
-
-		expect(todoApp.state.todos[0].completed).toBe(true)
-		todoApp.handleToggle(todoDummy.id)
-		expect(todoApp.state.todos[0].completed).toBe(false)
-		expect(todoApp.state.todos[0].completedAt).toNotExist()
-	})*/
-
 })
 
 /*--------------------------------------------------------------*/
@@ -318,16 +247,6 @@ describe('Component ToDo ', () => {
 	it('Test #1: Component AddToDo should exist', () => {
 		expect(AddTodo).toExist()
 	})
-/*	it('Test #2: onSetText should accept only defined strings', () => {
-		let spy = expect.createSpy()
-		let textInForm = TestUtils.renderIntoDocument(<AddTodo onSetText={spy} />)
-		let $el = $(ReactDOM.findDOMNode(textInForm))
-
-		textInForm.refs.todoPassed.value = 'Defined string'
-		TestUtils.Simulate.submit($el.find('form')[0])
-
-		expect(spy).toHaveBeenCalledWith('Defined string')
-	})	*/
 
 	it('Test #2: (after redux) should dispatch ADD_TODO  when valid text', () => {
 		let searchText = 'Defined string'
@@ -447,6 +366,22 @@ describe('Actions Testing', () => {
 		expect(response).toEqual(completedAction)
 	})	
 
+	it('Test #5: it should generate Todos action object', () => {
+		let todos = [{
+			id: 111,
+			text: 'anything',
+			completed: false,
+			completedAt: undefined,
+			createdAt: 15000,
+		}]
+		let completedAction = {
+			type: "ADD_TODOS",
+			todos
+		}
+		let response =  actions.addTodos(todos)
+		expect(response).toEqual(completedAction)
+	})
+
 })
 
 /*--------------------------------------------------------------*/
@@ -512,6 +447,25 @@ describe('Reducers testing', () => {
 
 			expect(response[0].completed).toEqual(false)
 			expect(response[0].completedAt).toEqual(undefined)	
+		})
+
+		it('Test #3: it should add existing todos', () => {
+			let todos = [{
+				id: 111,
+				text: 'anything',
+				completed: false,
+				completedAt: undefined,
+				createdAt: 15000,
+			}]
+			let completedAction = {
+				type: "ADD_TODOS",
+				todos
+			}
+
+			let response = reducers.todosReducer( df([]), df(completedAction) )
+
+			expect(response.length).toEqual(1)
+			expect(response[0]).toEqual(todos[0])
 		})
 
 	})

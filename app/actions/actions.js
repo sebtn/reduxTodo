@@ -12,6 +12,14 @@ export let addTodo = (text) => {
 	}
 }
 
+/*Used for localStorage takes an array as argument */
+export let addTodos = (todos) => {
+	return {
+		type: "ADD_TODOS",
+		todos
+	}
+}
+
 export let toggleShowCompleted = () => {
 	return {
 		type: "TOGGLE_SHOW_COMPLETED",
