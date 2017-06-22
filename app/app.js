@@ -10,14 +10,6 @@ let store = require('././store/configureStore').configure()
 
 'use strict'
 
-let unsubscribe = store.subscribe(() =>
-  console.log(store.getState())
-)
-
-
-
-// ReactDOM.render(<TodoApp />, document.getElementById('root'))
-
 ReactDOM.render(
 	<Provider store={store}>
 		<TodoApp />
