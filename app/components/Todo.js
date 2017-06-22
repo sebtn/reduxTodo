@@ -7,7 +7,6 @@ import {bindActionCreators} from 'redux'
 // import {toggleTodo} from '../actions/actions'
 import * as actions from '../actions/actions'
 
-
 'use strict'
 export class Todo extends Component {
 render() {
@@ -34,7 +33,6 @@ render() {
 /*--------------------------------------------------------------*/
 		return(
 			<div className={todoClassName} onClick={ () =>  { 
-				// this.props.onToggle(id)
 				dispatch(actions.toggleTodo(id))
 			}}>
 				<div>
@@ -58,16 +56,4 @@ render() {
 }
 
 /*-----------------------------------------------------------------*/
-//  let mapStateToProps = (state) => {
-//   return {
-//   	id: state.todos,
-//  }
-// }
-/*--------------------------------------------------------------*/
-// let  mapDispatchToProps = (dispatch) => {
-// 	  return bindActionCreators({ onToggle: toggleTodo }, dispatch)
-// }
-
-// export default connect(mapStateToProps, mapDispatchToProps)(Todo)
 export default connect()(Todo)
-/*-----------------------------------------------------------------*/

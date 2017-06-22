@@ -7,16 +7,6 @@ import * as actions from '../actions/actions'
 'use strict'
 
 export class TodoSearch extends Component {
-/*--------------------------------------------------------------*/
-/*	handleSearch = () => {
-		let searchText = this.refs.searchText.value
-		let showCompleted = this.refs.showCompleted.checked
-
-		this.props.onSearch(showCompleted, searchText)
-	}*/
-
-
-/*--------------------------------------------------------------*/
 	render() {
 		let {dispatch, showCompleted, searchText} = this.props
 		return(

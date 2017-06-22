@@ -21,12 +21,10 @@ export class TodoList extends Component {
 			)
 		}
 		/*Map all the 'todos' array, which is being passed as prop*/
-		// return todos.map( (todo) => {
 		return TodoApi.filterTodos(todos, showCompleted, searchText).map( (todo) => {
 			return (
 				<Todo 
 					key={todo.id} 
-					 // onToggle={this.props.onToggle} 
 					{...todo}
 			 />
 			)
@@ -43,12 +41,6 @@ export class TodoList extends Component {
 }
 
 /*--------------------------------------------------------------*/
-// let mapStateToProps = (state) =>  {
-// 	return { 
-// 		todos: state.todos,
-// 	}
-// }
-
 export default connect(
 		(state) => {
 			return state

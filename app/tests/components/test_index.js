@@ -5,16 +5,12 @@ import TestUtils from 'react-addons-test-utils'
 import $ from 'jquery'
 import {Provider} from 'react-redux'
 
-/*Import components commented out are before redux*/
-// import Todo from '../../components/Todo'
+
 import connectedTodo, {Todo} from '../../components/Todo'
 import TodoList from '../../components/TodoList'
-// import connectedTodoList, {TodoList} from '../../components/TodoList'
 import TodoApp from '../../components/TodoApp'
-// import AddTodo from '../../components/AddTodo'
 import {AddTodo} from '../../components/AddTodo'
 import {TodoSearch} from '../../components/TodoSearch'
-// import TodoSearch from '../../components/TodoSearch'
 import TodoApi from '../../api/TodoApi'
 import uuid from 'node-uuid'
 import moment from 'moment'

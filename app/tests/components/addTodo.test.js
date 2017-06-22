@@ -14,17 +14,6 @@ describe('Component Add To Do ', () => {
 		expect(AddTodo).toExist()
 	})
 
-/*	it('Test #2: onSetText should accept only defined strings', () => {
-		let spy = expect.createSpy()
-		let textInForm = TestUtils.renderIntoDocument(<AddTodo onSetText={spy} />)
-		let $el = $(ReactDOM.findDOMNode(textInForm))
-
-		textInForm.refs.todoPassed.value = 'Defined string'
-		TestUtils.Simulate.submit($el.find('form')[0])
-
-		expect(spy).toHaveBeenCalledWith('Defined string')
-	})	*/
-
 	it('Test #2: (after redux) should dispatch ADD_TODO  when valid text', () => {
 			var action = {
 				type: 'ADD_TODO',
