@@ -6,7 +6,7 @@ import TodoApp from '././components/TodoApp'
 import  '././styles/app.scss' 
 import * as actions from '././actions/actions'
 import TodoApi from '././api/TodoApi'
-
+import './../firebase/index'
 
 let store = require('././store/configureStore').configure()
 
