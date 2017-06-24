@@ -37,9 +37,9 @@ testsContext.keys().forEach(testsContext)
 /*Begin tests*/
 /*--------------------------------------------------------------*/
 /*Main: app Component*/
-describe('Main App', () => {
+describe('Main App' + '\n', () => {
 
-	it('The App should be testable', () => {
+	it('The App should be testable'+ '\n', () => {
 		expect(1).toBe(1)
 	})
 
@@ -47,22 +47,22 @@ describe('Main App', () => {
 
 /*Test todoAPI*/
 /*--------------------------------------------------------------*/
-describe('TodoApi component', () => {
+describe('TodoApi component' + '\n', () => {
 
 	beforeEach( () => {
 		localStorage.removeItem('todos')
 	})
 
-	it('Test #1: Api should exists', () => {
+	it('Test #1: Api should exists' + '\n', () => {
 		expect(TodoApi).toExist()
 	})
 
-	it('test #2: getTodos should return empty array for bad storage', () => {
+	it('test #2: getTodos should return empty array for bad storage' + '\n', () => {
 		let actualTodos = TodoApi.getTodos()
 		expect(actualTodos).toEqual([])
 	})
 
-	it('test #3: getTodos should return valid array for proper storage', () => {
+	it('test #3: getTodos should return valid array for proper storage' + '\n', () => {
 		let todos = [{
 			id: 23,
 			text: 'some text',
@@ -74,7 +74,7 @@ describe('TodoApi component', () => {
 		expect(actualTodos).toEqual(todos)
 	})
 
-	it('test #4: setTodos should set valid array todos', () => {
+	it('test #4: setTodos should set valid array todos' + '\n', () => {
 		let todos = [{
 			id: 23,
 			text: 'some text',
@@ -86,14 +86,14 @@ describe('TodoApi component', () => {
 		expect(actualTodos).toEqual(todos)
 	})
 
-	it('test #5: setTodos should NOT set invalid array todos', () => {
+	it('test #5: setTodos should NOT set invalid array todos' + '\n', () => {
 		let badTodos = {dummy: 'dummy'} 
 		TodoApi.setTodos(badTodos)
 
 		expect(localStorage.getItem('todos')).toBe(null)
 	})
 
-	describe('Nest #1: filterTodo method', () => {
+	describe('Nest #1: filterTodo method' + '\n', () => {
 		let todos = [{
 			id: 1,
 			text: 'some string text',
@@ -109,31 +109,31 @@ describe('TodoApi component', () => {
 			}
 		]
 
-		it('Test #1: showCompleted will return all items if completed props is true', () => {
+		it('Test #1: showCompleted will return all items if completed props is true' + '\n', () => {
 			let filteredTodos = TodoApi.filterTodos(todos, true, '')
 
 			expect(filteredTodos.length).toBe(3)
 		})
 
-		it('Test #2: showCompleted should return NOT all items if completed is false', () => {
+		it('Test #2: showCompleted should return NOT all items if completed is false' + '\n', () => {
 			let filteredTodos = TodoApi.filterTodos(todos, false, '')
 
 			expect(filteredTodos.length).toBe(1)
 		})
 
-		it('Test #3: showCompleted should sort by completed status', () => {
+		it('Test #3: showCompleted should sort by completed status' + '\n', () => {
 			let filteredTodos = TodoApi.filterTodos(todos, true, '')
 
 			expect(filteredTodos[0].completed).toBe(false)
 		})
 
-		it('Test #4: showCompleted should filter by text', () => {
+		it('Test #4: showCompleted should filter by text' + '\n', () => {
 			let filteredTodos = TodoApi.filterTodos(todos, true, 'some')
 
 			expect(filteredTodos.length).toBe(2)
 		})
 
-		it('Test #5: showCompleted should return all items if search bar empty', () => {
+		it('Test #5: showCompleted should return all items if search bar empty' + '\n', () => {
 			let filteredTodos = TodoApi.filterTodos(todos, true, '')
 
 			expect(filteredTodos.length).toBe(3)
@@ -145,14 +145,14 @@ describe('TodoApi component', () => {
 
 /*--------------------------------------------------------------*/
 /*Component Todo*/
-describe('Component Todo', () => {
+describe('Component Todo' + '\n', () => {
 
-	it('Test #1: Component Todo should exist', () => {
+	it('Test #1: Component Todo should exist' + '\n', () => {
 		expect(Todo).toExist()
 	})
 
 	// it('Test #2: it should call onToggle prop with OnClick', () => {
-	it('Test #2: (after redux) should dispatch TOGGLE_TODO action onClick', () => {
+	it('Test #2: (after redux) should dispatch TOGGLE_TODO action onClick' + '\n', () => {
 		let todoDummy = {
 			id: 155,
 			text: 'Some text here',
@@ -177,13 +177,13 @@ describe('Component Todo', () => {
 
 /*--------------------------------------------------------------*/
 /*Component TodoList*/
-describe('Component TodoList', () => {
+describe('Component TodoList' + '\n', () => {
 
-	it('Test #1: Component TodoList should exist', () =>  {
+	it('Test #1: Component TodoList should exist' + '\n', () =>  {
 		expect(TodoList).toExist()
 	})
 	
-		it('Test#2: (after redux) should render one Todo for each item in array', () => {
+		it('Test#2: (after redux) should render one Todo for each item in array' + '\n', () => {
 			let todos = [{
 					id:1, 
 					text:'Some text for item 1', 
@@ -215,13 +215,13 @@ describe('Component TodoList', () => {
 
 /*--------------------------------------------------------------*/
 /*Component TodoApp*/
-describe('Component TodoApp', () => {
+describe('Component TodoApp' + '\n', () => {
 
-	it('Test #1: Component TodoApp should exist', () =>  {
+	it('Test #1: Component TodoApp should exist' + '\n', () =>  {
 		expect(TodoApp).toExist()
 	})
 
-	it('Test #1: (after redux) should render TodoList', () => {
+	it('Test #1: (after redux) should render TodoList' + '\n', () => {
 		let store = configure()
 		let provider = TestUtils.renderIntoDocument(
 			<Provider store={store}>
@@ -238,13 +238,13 @@ describe('Component TodoApp', () => {
 
 /*--------------------------------------------------------------*/
 /*Component TodoAdd*/
-describe('Component ToDo ', () => {
+describe('Component ToDo ' + '\n', () => {
 
-	it('Test #1: Component AddToDo should exist', () => {
+	it('Test #1: Component AddToDo should exist' + '\n', () => {
 		expect(AddTodo).toExist()
 	})
 
-	it('Test #2: (after redux) should dispatch ADD_TODO  when valid text', () => {
+	it('Test #2: (after redux) should dispatch ADD_TODO  when valid text' + '\n', () => {
 		let searchText = 'Defined string'
 			var action = {
 				type: 'ADD_TODO',
@@ -261,7 +261,7 @@ describe('Component ToDo ', () => {
 		})
 
 	// it('Test #3: onSetText should NOT accept undefined strings', () => {
-	it('Test #3: (after redux) should not dispatch ADD_TODO when valid text', () => {
+	it('Test #3: (after redux) should not dispatch ADD_TODO when valid text' + '\n', () => {
 		let spy = expect.createSpy()
 		// let textInForm = TestUtils.renderIntoDocument(<AddTodo onSetText={spy} />)
 		let textInForm = TestUtils.renderIntoDocument(<AddTodo dispatch={spy} />)
@@ -276,14 +276,14 @@ describe('Component ToDo ', () => {
 
 /*--------------------------------------------------------------*/
 /*Component TodoSearch*/
-describe('Component TodoSearch exists', () => {
+describe('Component TodoSearch exists' + '\n', () => {
 	
-	it('test #1: verifies the component exists', () => {
+	it('test #1: verifies the component exists' + '\n', () => {
 		expect(TodoSearch).toBe(TodoSearch)
 	})
 
 	// it('test #2: onSearch should get called with input text on search bar', () => {
-	it('test #2: (after redux) should dispatch "SET_SEARCH_TEXT" on input change', () => {
+	it('test #2: (after redux) should dispatch "SET_SEARCH_TEXT" on input change' + '\n', () => {
 		let searchText = 'Acid test'
 		let action = {
 			type: "SET_SEARCH_TEXT",
@@ -301,7 +301,7 @@ describe('Component TodoSearch exists', () => {
 	})
 
 	// it('test #3: it should called onSearch when check box is used ', () => {
-	it('test #3: (after redux) it should dispatch "TOGGLE_SHOW_COMPLETED" on checkbox checked ', () => {
+	it('test #3: (after redux) it should dispatch "TOGGLE_SHOW_COMPLETED" on checkbox checked ' + '\n', () => {
 		let action = {
 			type: "TOGGLE_SHOW_COMPLETED"
 		}
@@ -321,9 +321,9 @@ describe('Component TodoSearch exists', () => {
 
 /*--------------------------------------------------------------*/
 /*Testing actions*/
-describe('Actions Testing', () => {
+describe('Actions Testing' + '\n', () => {
 
-	it('Test #1: should generate search text action', () => {
+	it('Test #1: should generate search text action' + '\n', () => {
 		let completedAction = {
 			type: "SET_SEARCH_TEXT",
 			searchText: 'some text'
@@ -333,7 +333,7 @@ describe('Actions Testing', () => {
 		expect(response).toEqual(completedAction)
 	})	
 
-	it('Test #2: should generate add todo action', () => {
+	it('Test #2: should generate add todo action' + '\n', () => {
 		let completedAction = {
 			type: "ADD_TODO",
 			text: 'Thing todo'
@@ -343,7 +343,7 @@ describe('Actions Testing', () => {
 		expect(response).toEqual(completedAction)
 	})	
 
-	it('Test #3: should generate toggle show completed action', () => {
+	it('Test #3: should generate toggle show completed action' + '\n', () => {
 		let completedAction = {
 			type: "TOGGLE_SHOW_COMPLETED",
 		}
@@ -352,7 +352,7 @@ describe('Actions Testing', () => {
 		expect(response).toEqual(completedAction)
 	})	
 
-	it('Test #4: should generate toggle todo action', () => {
+	it('Test #4: should generate toggle todo action' + '\n', () => {
 		let completedAction = {
 			type: "TOGGLE_TODO",
 			id: '2'
@@ -362,7 +362,7 @@ describe('Actions Testing', () => {
 		expect(response).toEqual(completedAction)
 	})	
 
-	it('Test #5: it should generate Todos action object', () => {
+	it('Test #5: it should generate Todos action object' + '\n', () => {
 		let todos = [{
 			id: 111,
 			text: 'anything',
@@ -382,11 +382,11 @@ describe('Actions Testing', () => {
 
 /*--------------------------------------------------------------*/
 /*Testing reducers*/
-describe('Reducers testing', () => {
+describe('Reducers testing' + '\n', () => {
 
-	describe('searchText reducer testing', () => {
+	describe('searchText reducer testing' + '\n', () => {
 
-		it('Test #1: it should update searchText when action called', () => {
+		it('Test #1: it should update searchText when action called' + '\n', () => {
 			let action = {
 				type: "SET_SEARCH_TEXT",
 				searchText: "Cat"
@@ -399,9 +399,9 @@ describe('Reducers testing', () => {
 
 	})
 
-	describe('showCompletedReducer testing', () => {
+	describe('showCompletedReducer testing' + '\n', () => {
 
-		it('Test #1: it should update state when action called', () => {
+		it('Test #1: it should update state when action called' + '\n', () => {
 			let action = {
 				type: "TOGGLE_SHOW_COMPLETED",
 			}
@@ -413,9 +413,9 @@ describe('Reducers testing', () => {
 
 	})
 
-	describe('addTodoReducer Testing', () => {
+	describe('addTodoReducer Testing' + '\n', () => {
 
-		it('Test #1: it should add todo when action called', () => {
+		it('Test #1: it should add todo when action called' + '\n', () => {
 			let action = {
 				type: "ADD_TODO",
 				text: "I like cats"
@@ -426,7 +426,7 @@ describe('Reducers testing', () => {
 			expect(response[0].text).toEqual(action.text)
 		})
 
-		it('Test #2: it should toggle todo when action called', () => {
+		it('Test #2: it should toggle todo when action called' + '\n', () => {
 			let action =  {
 				type: "TOGGLE_TODO",
 				id: 1,
@@ -445,7 +445,7 @@ describe('Reducers testing', () => {
 			expect(response[0].completedAt).toEqual(undefined)	
 		})
 
-		it('Test #3: it should add existing todos', () => {
+		it('Test #3: it should add existing todos' + '\n', () => {
 			let todos = [{
 				id: 111,
 				text: 'anything',

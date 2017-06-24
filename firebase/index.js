@@ -1,6 +1,7 @@
 import firebase from 'firebase'
 import {apiKey} from './../apiKey'
-// Initialize Firebase
+
+
 let  config = {
   apiKey,
   authDomain: "burn-after-todo.firebaseapp.com",
@@ -14,19 +15,29 @@ firebase.initializeApp(config)
 let firebaseRef = firebase.database().ref()
 
 firebaseRef.set({
-  appName: "Redux Todo",
+  app: {
+    name: "Redux Todo",
+    version: '1.0.0'
+  },
   isRunning: true,
   user: {
     name: "Seb",
-    age: 1
+    age: "IDK"
   }
-}).then (() => {
-  console.log('Set did it!')
-}), (error) => {
-  console.log('Set failed')
-}
-/* set method returns a promise*/
-firebaseRef.child('user').set({
-  name: "Sebtn 2",
+}) 
 
+/*-----------------------------------------------------------*/
+/*Using arrays by creating a node called notes
+Arrays are created as objects passing unique id as key*/
+
+let todosRef = firebaseRef.child('todos')
+
+/*Using TodosRef*/
+todosRef.on('child_added', (snapshot) => {
+  console.log('child added: ', snapshot.key + '\n' +  "object is: " , snapshot.val())
 })
+
+let newTodosRef = todosRef.push({
+  text: "this is todo numero 1"
+})
+console.log('Key: todo id: ', newTodosRef.key)
