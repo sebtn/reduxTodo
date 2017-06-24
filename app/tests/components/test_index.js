@@ -183,32 +183,32 @@ describe('Component TodoList' + '\n', () => {
 		expect(TodoList).toExist()
 	})
 	
-		it('Test#2: (after redux) should render one Todo for each item in array' + '\n', () => {
-			let todos = [{
-					id:1, 
-					text:'Some text for item 1', 
-					completed: false, 
-					completedAt: undefined, 
-					createdAt: 500 
-				}, {
-					id:2, 
-					text:'some text for item 2', 
-					completed: false, 
-					completedAt: undefined, 
-					createdAt: 500 
-				}
-			]
+	it('Test#2: (after redux) should render one Todo for each item in array' + '\n', () => {
+		let todos = [{
+				id:1, 
+				text:'Some text for item 1', 
+				completed: false, 
+				completedAt: undefined, 
+				createdAt: 500 
+			}, {
+				id:2, 
+				text:'some text for item 2', 
+				completed: false, 
+				completedAt: undefined, 
+				createdAt: 500 
+			}
+		]
 
-			let store = configure({todos: todos})
-			let provider = TestUtils.renderIntoDocument(
-				<Provider store={store}>
-					<TodoList />
-				</Provider>
-			)
-			let todoList = TestUtils.scryRenderedComponentsWithType(provider, TodoList)[0]
-			let todosRendered = TestUtils.scryRenderedComponentsWithType(todoList, Todo)
+		let store = configure({todos: todos})
+		let provider = TestUtils.renderIntoDocument(
+			<Provider store={store}>
+				<TodoList />
+			</Provider>
+		)
+		let todoList = TestUtils.scryRenderedComponentsWithType(provider, TodoList)[0]
+		let todosRendered = TestUtils.scryRenderedComponentsWithType(todoList, Todo)
 
-			expect(todos.length).toBe(todosRendered.length)
+		expect(todos.length).toBe(todosRendered.length)
 	})
 
 })
