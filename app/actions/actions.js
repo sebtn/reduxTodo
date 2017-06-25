@@ -40,8 +40,10 @@ export let startAddTodo = (text) => {
 			completedAt: null 
 		}		
 		let todoRef = firebaseRef.child('todos').push(todo)
-		/*Calling dispatch updates the store*/
-		todoRef.then( () => {
+		/*Calling dispatch updates the store, should explicitly 
+		return, else the test will not receive the promise, 
+		returning undefined even though method works */
+		return todoRef.then( () => {
 			dispatch( addTodo({
 				...todo,
 				id: todoRef.key

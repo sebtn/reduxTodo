@@ -4,7 +4,8 @@ import expect from 'expect'
 import TestUtils from 'react-addons-test-utils'
 import $ from 'jquery'
 import {Provider} from 'react-redux'
-
+import configureStore from 'redux-mock-store'
+import thunk from 'redux-thunk'
 
 import connectedTodo, {Todo} from '../../components/Todo'
 import TodoList from '../../components/TodoList'
@@ -17,7 +18,7 @@ import moment from 'moment'
 
 /*Import all as actions so we can use the "alias" actions*/
 import * as actions from '../../actions/actions'
-import {setSearchText, addTodo, toggleShowCompleted, toggleTodo}  from '../../actions/actions'
+import {setSearchText, addTodo, toggleShowCompleted, toggleTodo, startAddTodo}  from '../../actions/actions'
 
 /*import reducers*/
 import df from 'deep-freeze-strict'
@@ -25,8 +26,12 @@ import * as reducers from '../../reducers/reducers'
 import {searchTextReducer,showCompletedReducer, todosReducer} from '../../reducers/reducers'
 
 /*import store*/
-let configureStore = require('../../store/configureStore')
 import {configure} from '../../store/configureStore'
+
+/*create mock store*/
+const middlewares = [thunk] 
+let createMockStore = configureStore(middlewares)
+
 
 'use strict'
 /*require all modules ending in "_test" from the
@@ -382,6 +387,22 @@ describe('Actions Testing' + '\n', () => {
 		let response =  actions.addTodos(todos)
 		expect(response).toEqual(completedAction)
 	})
+
+	it('Test #6: should create todo and dispatch ADD_TODO' + '\n', (done) => {
+    const store = createMockStore({})
+    const todoText = 'Something Here'
+
+     store.dispatch(actions.startAddTodo(todoText)).then(() => {
+        const actions = store.getActions()
+        expect(actions[0]).toInclude({
+          type: 'ADD_TODO'
+        })
+        expect(actions[0].todo).toInclude({
+          text: todoText
+        })
+        done()
+      }).catch(done)
+    })
 
 })
 

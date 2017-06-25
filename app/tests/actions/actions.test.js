@@ -1,10 +1,14 @@
 import expect from 'expect'
 /*Import all as actions so we can use the "alias" actions*/
 import * as actions from './../actions/actions'
+import configureMockStore from 'redux-mock-store'
+import thunk from 'redux-thunk'
 import {setSearchText, 
 	addTodo, 
 	toggleShowCompleted, 
 	toggleTodo}  from '../../actions/actions'
+
+let createMockStore = configureMockStore([thunk]) 
 
 describe('Actions Testing', () => {
 
@@ -66,6 +70,23 @@ describe('Actions Testing', () => {
 		}
 		let response =  actions.addTodos(completedAction)
 		expect(response).toEqual(completedAction)
+	})
+
+	it('Test #6: should create todo and dispatch ADD_TODO', (done) => {
+		const store = createMockStore({})
+		const todoText = 'Something here' 
+
+		store.dispatch(actions.startAddTodo(todoText))
+			.then(() => {
+				const actions = store.getActions()
+				expect(actions[0]).toInclude({
+					type: 'ADD_TODO'
+				})
+				expect(actions[0]).toInclude({
+					text: todoText
+				})
+				done()
+		}).catch(done)
 	})
 
 })
