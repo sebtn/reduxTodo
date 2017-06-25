@@ -52,7 +52,6 @@
 ├── README.md
 ├── server.js
 ├── tree.js
-├── tree.txt
 └── webpack.config.js
 
-16 directories, 39 files
+16 directories, 38 files
