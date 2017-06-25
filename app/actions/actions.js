@@ -1,3 +1,6 @@
+import firebase, {firebaseRef} from '../../firebase/index'
+import moment from 'moment'
+
 export let setSearchText = (searchText) => {
 	return {
 		type: "SET_SEARCH_TEXT",
@@ -5,10 +8,10 @@ export let setSearchText = (searchText) => {
 	}
 }
 
-export let addTodo = (text) => {
+export let addTodo = (todo) => {
 	return {
 		type: "ADD_TODO",
-		text
+		todo
 	}
 }
 
@@ -19,6 +22,29 @@ export let addTodos = (todos) => {
 		todos
 	}
 }
+/*interaction with firebase, return a function
+this pattern is called a thunk*/
+export let startAddTodo = (text) => {
+	/*dispatch after the data is saved in db 
+	get current state of store*/
+	return (dispatch, getState) => {
+		let todo = {
+			text: text,
+			completed: false, 
+			createdAt: moment().unix(), 
+			completedAt: null 
+		}		
+		let todoRef = firebaseRef.child('todos').push(todo)
+		/*Calling dispatch updates the store*/
+		todoRef.then( () => {
+			dispatch( addTodo({
+				...todo,
+				id: todoRef.key
+			}) )
+		} )
+	}
+}
+
 
 export let toggleShowCompleted = () => {
 	return {

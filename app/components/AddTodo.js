@@ -18,7 +18,9 @@ export class AddTodo extends Component {
 			this.refs.todoPassed.value = ' '
 			/* this.props.onSetText(text)
 			changed the cb for the method inside the todosReducer */			
-			dispatch(actions.addTodo(text))
+			// dispatch(actions.addTodo(text))
+			/*Now using the firebase related method startAddTodo */
+			dispatch(actions.startAddTodo(text))
 		} else {
 			this.refs.todoPassed.focus()
 		}
