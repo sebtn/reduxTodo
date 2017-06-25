@@ -1,5 +1,6 @@
 import {combineReducers} from 'redux'
-let redux = require('redux')
+/*SInce there is no default redux*/
+import * as redux from 'redux-thunk'
 
 import {searchTextReducer,
 	showCompletedReducer, 
@@ -12,7 +13,8 @@ export let configure = (initialState = {}) => {
 		todos: todosReducer
 	})
 	 let store = redux.createStore(reducer, initialState, redux.compose(
-			window.devToolsExtension ? window.devToolsExtension() : f => f 
-		))
+	 	redux.applyMiddleWare(thunk),
+		window.devToolsExtension ? window.devToolsExtension() : f => f 
+	))
 	return store
 }
