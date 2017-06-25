@@ -12,7 +12,7 @@ let store = require('././store/configureStore').configure()
 
 store.subscribe( () => {
   let state = store.getState() 
-  console.log('New state: ', state)
+  console.log('New state object each time store dispatches:' + '\n ', state)
   TodoApi.setTodos(state.todos)
 }) 
 

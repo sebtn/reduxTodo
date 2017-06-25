@@ -37,19 +37,25 @@ describe('Reducers testing', () => {
 		it('Test #1: it should add todo when action called', () => {
 			let action = {
 				type: "ADD_TODO",
-				text: "I like cats"
+				// text: "I like cats" before firebase
+				todo: {
+					id: '123',
+					text: 'Some text to do with it',
+					completed: false,
+					createdAt: 123
+				}
 			}
 			let response = reducers.addTodoReducer( df([]), df(action) )
 			
 			expect(response.length).toEqual(1)
-			expect(response[0].text).toEqual(action.text)
+			expect(response[0]).toEqual(action.todo)
 		})	
 		it('Test #2: it should toggle todo when action called', () => {
 			let action =  {
 				type: "TOGGLE_TODO",
 				id: 123,
 			}
-			let todo: [
+			let todo: [ 
 				{				
 					id: 123,
 					completed: true,

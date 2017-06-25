@@ -15,15 +15,18 @@ describe('Component Add To Do ', () => {
 	})
 
 	it('Test #2: (after redux) should dispatch ADD_TODO  when valid text', () => {
-			var action = {
-				type: 'ADD_TODO',
-				text: 'Defined string'
-			}
+			// var action = {
+			// 	type: 'ADD_TODO',
+			// 	text: 'Defined string'
+			// }
+			let someText = 'Defined string'
+			let action = actions.startAddTodo(someText)
+
 			let spy = expect.createSpy()
 			let textInForm = TestUtils.renderIntoDocument(<AddTodo dispatch={spy} />)
 			let $el = $(ReactDOM.findDOMNode(textInForm))
 
-			textInForm.refs.todoPassed.value = 'Defined string'
+			textInForm.refs.todoPassed.value = someText
 			TestUtils.Simulate.submit($el.find('form')[0])
 
 			expect(spy).toHaveBeenCalledWith(action)

@@ -1,6 +1,7 @@
 import firebase, {firebaseRef} from '../../firebase/index'
 import moment from 'moment'
 
+/*-------------------------------------------------------*/
 export let setSearchText = (searchText) => {
 	return {
 		type: "SET_SEARCH_TEXT",
@@ -8,6 +9,7 @@ export let setSearchText = (searchText) => {
 	}
 }
 
+/*-------------------------------------------------------*/
 export let addTodo = (todo) => {
 	return {
 		type: "ADD_TODO",
@@ -15,6 +17,7 @@ export let addTodo = (todo) => {
 	}
 }
 
+/*-------------------------------------------------------*/
 /*Used for localStorage takes an array as argument */
 export let addTodos = (todos) => {
 	return {
@@ -22,10 +25,12 @@ export let addTodos = (todos) => {
 		todos
 	}
 }
-/*interaction with firebase, return a function
-this pattern is called a thunk*/
+
+/*-------------------------------------------------------*/
+/* Async interaction with firebase, returning 
+a function... this pattern is called a thunk*/
 export let startAddTodo = (text) => {
-	/*dispatch after the data is saved in db 
+	/*dispatch actions after the data is saved in db 
 	get current state of store*/
 	return (dispatch, getState) => {
 		let todo = {
@@ -45,13 +50,14 @@ export let startAddTodo = (text) => {
 	}
 }
 
-
+/*-------------------------------------------------------*/
 export let toggleShowCompleted = () => {
 	return {
 		type: "TOGGLE_SHOW_COMPLETED",
 	}
 }
 
+/*-------------------------------------------------------*/
 export let toggleTodo = (id) => {
 	return {
 		type: "TOGGLE_TODO",

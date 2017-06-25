@@ -21,9 +21,14 @@ describe('Actions Testing', () => {
 	it('Test #2: should generate add todo action', () => {
 		let completedAction = {
 			type: "ADD_TODO",
-			text: 'Thing todo'
+			todo: {
+				id: '123',
+				text: 'Some text',
+				completed: false,
+				createdAt: 0
+			}
 		}
-		let response = actions.addTodo(completedAction.text)
+		let response = actions.addTodo(completedAction.todo)
 
 		expect(response).toEqual(completedAction)
 	})	

@@ -237,7 +237,7 @@ describe('Component TodoApp' + '\n', () => {
 })
 
 /*--------------------------------------------------------------*/
-/*Component TodoAdd*/
+/*Component AddTodo*/
 describe('Component ToDo ' + '\n', () => {
 
 	it('Test #1: Component AddToDo should exist' + '\n', () => {
@@ -245,19 +245,17 @@ describe('Component ToDo ' + '\n', () => {
 	})
 
 	it('Test #2: (after redux) should dispatch ADD_TODO  when valid text' + '\n', () => {
-		let searchText = 'Defined string'
-			var action = {
-				type: 'ADD_TODO',
-				text: searchText
-			}
-			let spy = expect.createSpy()
-			let textInForm = TestUtils.renderIntoDocument(<AddTodo dispatch={spy} />)
-			let $el = $(ReactDOM.findDOMNode(textInForm))
+		let someText = 'Defined string'
+		let action = actions.startAddTodo(someText)
 
-			textInForm.refs.todoPassed.value = searchText
-			TestUtils.Simulate.submit($el.find('form')[0])
+		let spy = expect.createSpy()
+		let textInForm = TestUtils.renderIntoDocument(<AddTodo dispatch={spy} />)
+		let $el = $(ReactDOM.findDOMNode(textInForm))
 
-			expect(spy).toHaveBeenCalledWith(action)
+		textInForm.refs.todoPassed.value = someText
+		TestUtils.Simulate.submit($el.find('form')[0])
+
+		expect(spy).toHaveBeenCalledWith(action)
 		})
 
 	// it('Test #3: onSetText should NOT accept undefined strings', () => {
@@ -336,9 +334,16 @@ describe('Actions Testing' + '\n', () => {
 	it('Test #2: should generate add todo action' + '\n', () => {
 		let completedAction = {
 			type: "ADD_TODO",
-			text: 'Thing todo'
+			// text: 'Thing todo' -> before firebase
+			todo: {
+				id: '123',
+				text: 'Some text',
+				completed: false,
+				createdAt: 0
+			}
 		}
-		let response = actions.addTodo(completedAction.text)
+		// let response = actions.addTodo(completedAction.text)
+		let response = actions.addTodo(completedAction.todo)
 
 		expect(response).toEqual(completedAction)
 	})	
@@ -418,12 +423,21 @@ describe('Reducers testing' + '\n', () => {
 		it('Test #1: it should add todo when action called' + '\n', () => {
 			let action = {
 				type: "ADD_TODO",
-				text: "I like cats"
+				// text: "I like cats" -> before fb
+				todo: {
+					id: '123',
+					text: 'Some text to do with it',
+					completed: false,
+					createdAt: 123
+				}
 			}
 			let response = reducers.todosReducer( df([]), df(action) )
 			
 			expect(response.length).toEqual(1)
-			expect(response[0].text).toEqual(action.text)
+			// expect(response[0].text).toEqual(action.text)
+			
+			/*Since reducer is piping a todo an not a text*/
+			expect(response[0]).toEqual(action.todo)
 		})
 
 		it('Test #2: it should toggle todo when action called' + '\n', () => {
