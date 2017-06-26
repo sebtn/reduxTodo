@@ -30,7 +30,7 @@ export let addTodos = (todos) => {
 /* Async interaction with firebase, returning 
 a function... this pattern is called a thunk*/
 export let startAddTodo = (text) => {
-	/*dispatch actions after the data is saved in db 
+	/*dispatch actions after the data is saved in db, 
 	get current state of store*/
 	return (dispatch, getState) => {
 		let todo = {

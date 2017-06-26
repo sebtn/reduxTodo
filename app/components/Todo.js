@@ -9,9 +9,9 @@ import * as actions from '../actions/actions'
 
 'use strict'
 export class Todo extends Component {
-render() {
-	let {createdAt, completedAt, completed, text, id, dispatch} = this.props
-	let todoClassName = completed ? 'todo todo-completed' : 'todo'
+	render() {
+		let {createdAt, completedAt, completed, text, id, dispatch} = this.props
+		let todoClassName = completed ? 'todo todo-completed' : 'todo'
 	
 /*--------------------------------------------------------------*/
 	let renderedDate = () => {
@@ -21,11 +21,9 @@ render() {
 		if (completed) {
 			let message = '  Completed  '
 			let timestamp = completedAt
-			
 			return message + 
 				moment.unix(timestamp).format('MMM Do YYYY @ h:mm a') 
 		}
-
 		return message + 
 			moment.unix(timestamp).format('MMM Do YYYY @ h:mm a') 
 	} 
@@ -33,17 +31,15 @@ render() {
 /*--------------------------------------------------------------*/
 		return(
 			<div className={todoClassName} onClick={ () =>  { 
-				dispatch(actions.toggleTodo(id))
-			}}>
-				<div>
-					<label className="custom-control custom-checkbox">
+						dispatch(actions.toggleTodo(id))
+					}}>
+					<label className="custom-control custom-checkbox" >
 						<input  
 							className="custom-control-input" 
 							type="checkbox" 
 							defaultChecked={completed} />
 						<span className="custom-control-indicator"></span>
 					</label>
-				</div>
 				<div>
 					<p className="text"> {text} </p>
 					<div className="todo-subtext"> 

@@ -32,7 +32,6 @@ import {configure} from '../../store/configureStore'
 const middlewares = [thunk] 
 let createMockStore = configureStore(middlewares)
 
-
 'use strict'
 /*require all modules ending in "_test" from the
 current directory and all subdirectories*/
@@ -391,7 +390,8 @@ describe('Actions Testing' + '\n', () => {
 	it('Test #6: should create todo and dispatch ADD_TODO' + '\n', (done) => {
     const store = createMockStore({})
     const todoText = 'Something Here'
-
+    /* Receiving returned method form startAddTodo 
+    which waits fetch from firebase using todoRef.then */
      store.dispatch(actions.startAddTodo(todoText)).then(() => {
         const actions = store.getActions()
         expect(actions[0]).toInclude({
