@@ -22,16 +22,19 @@ describe('Component Todo', () => {
 			text: 'Some text here',
 			completed: true
 		}
+		let action = actions.startToggleTodo(todoDummy.id , !todoDummy.completed) 
+
 		let spy = expect.createSpy()
 		// let todo = TestUtils.renderIntoDocument(<Todo {...todoDummy} onToggle={spy}/>)
 		let todo = TestUtils.renderIntoDocument(<Todo {...todoDummy} dispatch={spy}/>)
 		let $el = $(ReactDOM.findDOMNode(todo))
 
 		TestUtils.Simulate.submit($el[0].onClick)
-		expect(spy).toHaveBeenCalledWith({
-			type: 'TOGGLE_TODO',
-			id: todoDummy.id
-		})
+		// expect(spy).toHaveBeenCalledWith({
+		// 	type: 'TOGGLE_TODO',
+		// 	id: todoDummy.id
+		// })
+		expect(spy).toHaveBeenCalledWith(action)
 	})
 
 })

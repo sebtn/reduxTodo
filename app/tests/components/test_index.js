@@ -6,6 +6,8 @@ import $ from 'jquery'
 import {Provider} from 'react-redux'
 import configureStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
+import firebase, {firebaseRef} from '../../../firebase/index'
+
 
 import connectedTodo, {Todo} from '../../components/Todo'
 import TodoList from '../../components/TodoList'
@@ -162,6 +164,9 @@ describe('Component Todo' + '\n', () => {
 			text: 'Some text here',
 			completed: true
 		}
+
+		let action = actions.startToggleTodo(todoDummy.id , !todoDummy.completed) 
+
 		let spy = expect.createSpy()
 		// let todoComponent = TestUtils.renderIntoDocument(<Todo {...todoDummy} onToggle={spy} />)
 		let todoComponent = TestUtils.renderIntoDocument(<Todo {...todoDummy} dispatch={spy}/>)
@@ -170,11 +175,11 @@ describe('Component Todo' + '\n', () => {
 		in the component*/
 		TestUtils.Simulate.click($el[0])
 		/*passing id onToggle using the spread to inject the props in the component*/
-		// expect(spy).toHaveBeenCalledWith(155)
-		expect(spy).toHaveBeenCalledWith({
-			type: 'TOGGLE_TODO',
-			id: todoDummy.id
-		})
+		expect(spy).toHaveBeenCalledWith(action)
+		// expect(spy).toHaveBeenCalledWith({
+		// 	type: 'TOGGLE_TODO',
+		// 	id: todoDummy.id
+		// })
 	})
 
 })
@@ -406,6 +411,38 @@ describe('Actions Testing' + '\n', () => {
         done()
       }).catch(done)
     })
+
+	describe('Firebase action todos test' + '\n', () => {
+		let testTodoRef 
+		beforeEach((done) => {
+			testTodoRef = firebaseRef.child('todos').push()
+			testTodoRef.set({
+				text: 'Some text',
+				completed: false,
+				createdAt: 123654,
+			}).then(() => { done() })
+		})
+		afterEach((done) => {
+			testTodoRef.remove().then( () => done() )
+		})
+		it('Test #1: Should toggle todo and dispatch UPDATE_TODO action ' + '\n' , (done) => {
+			const store = createMockStore({})
+			const action = actions.startToggleTodo(testTodoRef.key, true)
+
+			store.dispatch(action).then(() => {
+				const mockActions = store.getActions()
+				expect(mockActions[0]).toInclude({
+					type: "UPDATE_TODO",
+					id: testTodoRef.key,
+				})
+				expect(mockActions[0].updates).toInclude({
+					completed: true
+				})
+				expect(mockActions[0].updates.completedAt).toExist()
+				done()
+			}, done)
+		})
+	})
 
 })
 

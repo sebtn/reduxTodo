@@ -5,6 +5,7 @@ import TestUtils from 'react-addons-test-utils'
 import $ from 'jquery'
 
 import {AddTodo} from '../../components/AddTodo'
+import * as actions from '../../actions' 
 
 'use strict'
 

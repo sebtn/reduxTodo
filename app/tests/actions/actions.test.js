@@ -8,6 +8,8 @@ import {setSearchText,
 	toggleShowCompleted, 
 	toggleTodo}  from '../../actions/actions'
 
+import firebase, {firebaseRef} from '../../../firebase/index'
+
 let createMockStore = configureMockStore([thunk]) 
 
 describe('Actions Testing', () => {
@@ -90,6 +92,38 @@ describe('Actions Testing', () => {
 				})
 				done()
 		}).catch(done)
+	})
+
+	describe('Firebase action todos test' + '\n', () => {
+		let testTodoRef 
+		beforeEach((done) => {
+			testTodoRef = firebase.child('todos').push()
+			testTodoRef.set({
+				text: 'Some text',
+				completed: false,
+				createdAt: 123654,
+			}).then(() => { done() })
+		})
+		afterEach((done) => {
+			testTodoRef.remove().then( () => done() )
+		})
+		it('Test #1: Should toggle todo and dispatch UPDATE_TODO action ' + '\n' , (done) => {
+			const store = createMockStore({})
+			const action = actions.startToggleTodo(testTodoRef.key, true)
+
+			store.dispatch(action).then(() => {
+				const mockActions = store.getActions()
+				expect(mockActions[0]).toInclude({
+					type: "UPDATE_TODO",
+					id: testTodoRef.key,
+				})
+				expect(mockActions[0].updates).toInclude({
+					completed: true
+				})
+				expect(mockActions[0].updates.completedAt).toExist()
+				done()
+			}, done)
+		})
 	})
 
 })
