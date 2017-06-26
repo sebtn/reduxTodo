@@ -361,15 +361,18 @@ describe('Actions Testing' + '\n', () => {
 		expect(response).toEqual(completedAction)
 	})	
 
-	it('Test #4: should generate toggle todo action' + '\n', () => {
-		let completedAction = {
-			type: "TOGGLE_TODO",
-			id: '2'
-		}
-		let response = actions.toggleTodo(completedAction.id)
+	// it('Test #4: should generate toggle todo action' + '\n', () => {
+		it('Test #4: should generate update todo action' + '\n', () => {
+			let completedAction = {
+				type: "UPDATE_TODO",
+				id: '1223',
+				updates: {completed: false}
+			}
+			// let response = actions.toggleTodo(completedAction.id)
+			let response = actions.updateTodo(completedAction.id, completedAction.updates)
 
-		expect(response).toEqual(completedAction)
-	})	
+			expect(response).toEqual(completedAction)
+		})	
 
 	it('Test #5: it should generate Todos action object' + '\n', () => {
 		let todos = [{
