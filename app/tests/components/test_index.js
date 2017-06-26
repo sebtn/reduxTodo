@@ -464,25 +464,33 @@ describe('Reducers testing' + '\n', () => {
 			expect(response[0]).toEqual(action.todo)
 		})
 
-		it('Test #2: it should toggle todo when action called' + '\n', () => {
-			let action =  {
-				type: "TOGGLE_TODO",
-				id: 1,
-			}
-			let todos = [{	
-				id: 1,
-				completed: true, 
-				completedAt: 130, 
-				text: "I like my cat", 
-				createdAt: 125 
+		// it('Test #2: it should toggle todo when action called' + '\n', () => {
+			it('Test #2: it should update todo when action called' + '\n', () => {
+				let todos = [ 
+					{				
+						id: '123',
+						text: "I like my cat",
+						completed: true,
+						completedAt: 130,
+						createdAt: 125
+					}
+				]
+				let updates = {
+					completed: false,
+					completedAt: null
 				}
-			]
-			let response = reducers.todosReducer( df(todos), df(action) )
+				let action =  {
+					type: "UPDATE_TODO",
+					id: todos[0].id,
+					updates
+				}
+				// let response = reducers.addTodoReducer( df(todos), df(action) )
+				let response = reducers.todosReducer( df(todos), df(action) )
 
-			expect(response[0].completed).toEqual(false)
-			expect(response[0].completedAt).toEqual(undefined)	
-		})
-
+				expect(response[0].completed).toEqual(updates.completed)
+				expect(response[0].completedAt).toEqual(updates.completedAt)
+				expect(response[0].text).toEqual(todos[0].text)
+			})
 		it('Test #3: it should add existing todos' + '\n', () => {
 			let todos = [{
 				id: 111,
