@@ -31,7 +31,7 @@ export class Todo extends Component {
 /*--------------------------------------------------------------*/
 		return(
 			<div className={todoClassName} onClick={ () =>  { 
-						dispatch(actions.toggleTodo(id))
+						dispatch(actions.startToggleTodo(id, !completed))
 					}}>
 					<label className="custom-control custom-checkbox" >
 						<input  
@@ -40,12 +40,12 @@ export class Todo extends Component {
 							defaultChecked={completed} />
 						<span className="custom-control-indicator"></span>
 					</label>
-				<div>
-					<p className="text"> {text} </p>
-					<div className="todo-subtext"> 
-						{renderedDate()} 
-					</div>		
-				</div>
+					<div>
+						<p className="text"> {text} </p>
+						<div className="todo-subtext"> 
+							{renderedDate()} 
+						</div>		
+					</div>
 			</div>
 		)	
 	}
