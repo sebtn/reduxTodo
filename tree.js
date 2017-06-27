@@ -42,6 +42,9 @@
 │       │   └── todo.test.js
 │       └── reducers
 │           └── reducers.test.js
+├── config
+│   ├── development.env
+│   └── test.env
 ├── firebase
 │   └── index.js
 ├── karma.conf.js
@@ -54,4 +57,4 @@
 ├── tree.js
 └── webpack.config.js
 
-16 directories, 38 files
+17 directories, 40 files
