@@ -1,6 +1,7 @@
 import firebase, {firebaseRef} from '../../firebase/index'
 import moment from 'moment'
 
+
 /*-------------------------------------------------------*/
 export let setSearchText = (searchText) => {
 	return {
@@ -18,11 +19,30 @@ export let addTodo = (todo) => {
 }
 
 /*-------------------------------------------------------*/
-/*Used for localStorage takes an array as argument */
+/*Used for localStorage takes an array as argument 
+prints to screen when passed through the reducer*/
 export let addTodos = (todos) => {
 	return {
 		type: "ADD_TODOS",
 		todos
+	}
+}
+
+/*-------------------------------------------------------*/
+export let startAddTodos = () => {
+	return (dispatch, getState) => {
+		let todosRef = firebaseRef.child('todos')
+		return todosRef.once('value').then( (snapshot) => {
+			let parsedTodos = []
+			let todos = snapshot.val() || {}
+			Object.keys(todos).forEach( (todoId) => {
+				parsedTodos.push({
+					id: todoId,
+					...todos[todoId]
+				})
+			})
+			dispatch(addTodos(parsedTodos))
+		})
 	}
 }
 

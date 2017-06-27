@@ -10,15 +10,7 @@ import './../firebase/index'
 
 let store = require('././store/configureStore').configure()
 
-store.subscribe( () => {
-  let state = store.getState() 
-  console.log('New state object each time store dispatches:' + '\n ', state)
-  TodoApi.setTodos(state.todos)
-}) 
-
-/* action to add the todo arrays */
-let initialTodos = TodoApi.getTodos()
-store.dispatch(actions.addTodos(initialTodos))
+store.dispatch(actions.startAddTodos())
 
 'use strict'
 

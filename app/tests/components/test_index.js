@@ -63,42 +63,6 @@ describe('TodoApi component' + '\n', () => {
 		expect(TodoApi).toExist()
 	})
 
-	it('test #2: getTodos should return empty array for bad storage' + '\n', () => {
-		let actualTodos = TodoApi.getTodos()
-		expect(actualTodos).toEqual([])
-	})
-
-	it('test #3: getTodos should return valid array for proper storage' + '\n', () => {
-		let todos = [{
-			id: 23,
-			text: 'some text',
-			completed: false
-		}]
-		localStorage.setItem('todos', JSON.stringify(todos))
-		let actualTodos = TodoApi.getTodos()
-
-		expect(actualTodos).toEqual(todos)
-	})
-
-	it('test #4: setTodos should set valid array todos' + '\n', () => {
-		let todos = [{
-			id: 23,
-			text: 'some text',
-			completed: false
-		}]
-		TodoApi.setTodos(todos)
-		let actualTodos = JSON.parse(localStorage.getItem('todos'))
-
-		expect(actualTodos).toEqual(todos)
-	})
-
-	it('test #5: setTodos should NOT set invalid array todos' + '\n', () => {
-		let badTodos = {dummy: 'dummy'} 
-		TodoApi.setTodos(badTodos)
-
-		expect(localStorage.getItem('todos')).toBe(null)
-	})
-
 	describe('Nest #1: filterTodo method' + '\n', () => {
 		let todos = [{
 			id: 1,
@@ -414,17 +378,25 @@ describe('Actions Testing' + '\n', () => {
 
 	describe('Firebase action todos test' + '\n', () => {
 		let testTodoRef 
+
 		beforeEach((done) => {
-			testTodoRef = firebaseRef.child('todos').push()
-			testTodoRef.set({
-				text: 'Some text',
-				completed: false,
-				createdAt: 123654,
-			}).then(() => { done() })
+			let todosRef = firebaseRef.child('todos')
+			todosRef.remove().then(() => {
+				testTodoRef = firebaseRef.child('todos').push()
+				return testTodoRef.set({
+					text: 'Some text',
+					completed: false,
+					createdAt: 123654,
+				})
+			})
+			.then(() => { done() })
+			.catch(done)
 		})
+
 		afterEach((done) => {
 			testTodoRef.remove().then( () => done() )
 		})
+
 		it('Test #1: Should toggle todo and dispatch UPDATE_TODO action ' + '\n' , (done) => {
 			const store = createMockStore({})
 			const action = actions.startToggleTodo(testTodoRef.key, true)
@@ -442,6 +414,20 @@ describe('Actions Testing' + '\n', () => {
 				done()
 			}, done)
 		})
+		
+		it('Test #2: Should populate todos and dispatch ADD_TODOS action ' + '\n' , (done) => {
+			const store = createMockStore({})
+			const action = actions.startAddTodos()
+
+			store.dispatch(action).then(() => {
+				const mockActions = store.getActions()
+				expect(mockActions[0].type).toEqual("ADD_TODOS")
+				expect(mockActions[0].todos.length).toEqual(1)
+				expect(mockActions[0].todos[0].text).toEqual('Some text')
+				done()
+			}, done)
+		})
+		
 	})
 
 })
