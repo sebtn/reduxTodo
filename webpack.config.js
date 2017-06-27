@@ -1,14 +1,15 @@
 let path = require('path')
 let webpack = require('webpack')
 let envFile = require('node-env-file')
-/*fetch node env*/
+
+/* Fetching NODE_ENV */
 process.env.NODE_ENV = process.env.NODE_ENV || 'development'
-
-try {
-  envFile(path.join(__dirname, 'config/' + process.env.NODE_ENV + '.env'))
-} catch (e) {
-
-}
+/*Choose NODE_ENV file from config dir to be processed
+by plug-in*/
+try { envFile( path.join(__dirname, 'config/' 
+  + process.env.NODE_ENV + '.env') ) 
+} 
+catch (e) { }
 
 module.exports =  {
   entry: [

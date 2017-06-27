@@ -1,8 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import {Provider} from 'react-redux'
+import {Route, Router, 
+  IndexRoute, hashHistory, Link} from 'react-router'
 
 import TodoApp from '././components/TodoApp'
+import Login from '././components/Login'
 import  '././styles/app.scss' 
 import * as actions from '././actions/actions'
 import TodoApi from '././api/TodoApi'
@@ -16,6 +19,11 @@ store.dispatch(actions.startAddTodos())
 
 ReactDOM.render(
   <Provider store={store}>
-    <TodoApp />
+    <Router history={hashHistory}>
+      <Route path="/">
+        <Route path="/todos" component ={TodoApp} />
+        <IndexRoute component ={Login} />
+      </Route>
+    </Router>
   </Provider>,
  document.getElementById('root'))
