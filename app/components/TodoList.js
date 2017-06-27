@@ -9,7 +9,8 @@ export class TodoList extends Component {
 /*--------------------------------------------------------------*/
 	renderTodos = () => {
 		let {todos, showCompleted, searchText} = this.props
-		if (todos.length === 0) {
+		let filteredTodos = TodoApi.filterTodos(todos, showCompleted, searchText)
+		if (filteredTodos.length === 0) {
 			return (
 				<div className="message-empty">
 						<div className="alert alert-info" role="alert">
@@ -21,7 +22,7 @@ export class TodoList extends Component {
 			)
 		}
 		/*Map all the 'todos' array, which is being passed as prop*/
-		return TodoApi.filterTodos(todos, showCompleted, searchText).map( (todo) => {
+		return filteredTodos.map( (todo) => {
 			return (
 				<Todo 
 					key={todo.id} 
