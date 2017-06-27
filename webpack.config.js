@@ -1,6 +1,9 @@
 let path = require('path')
 let webpack = require('webpack')
 
+/*fetch node env*/
+process.env.NODE_ENV = process.env.NODE_ENV || 'development'
+
 module.exports =  {
   entry: [
     './app/app.js',
@@ -25,5 +28,5 @@ module.exports =  {
       }
     ]
   },
-  devtool: 'cheap-module-eval-source-map'
+  devtool: process.env.NODE_ENV === 'production' ? undefined :'cheap-module-eval-source-map'  
 }
