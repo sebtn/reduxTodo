@@ -1,8 +1,17 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
-import {connect} from 'react-redux'
+// import * as Redux from 'react-redux'
+// import *as actions from '../../actions'
 
 class Login extends Component {
+
+/*--------------------------------------------------------------*/
+/*  onLogin = () => {
+    let {dispatch} = this.props
+    dispatch(actions.startLogin())
+  }*/
+/*--------------------------------------------------------------*/
+
   render() {
     return(
       <div className="login-container">
@@ -12,12 +21,16 @@ class Login extends Component {
           <div className="col-sm-10 col-md-6 col-lg-4">
             <div className="card">
               <div className="card-header">
-                Useful and slik Todo 
+                <h3>Log In</h3>
               </div> 
               <div className="card-block">
-                <h4 className="card-title">Login</h4>
-                <p className="card-text">Use github to login</p>
+                <h5 className="card-title">Use github to login</h5>
                 <button className="btn btn-info btn-lg">Login with github</button>
+              {/*<button 
+                className="btn btn-info btn-lg" 
+                onClick={this.onLogin}>
+                Login with github
+              </button>*/}
               </div>
             </div>
           </div>
@@ -27,4 +40,5 @@ class Login extends Component {
     )
   }
 }
-export default connect()(Login)
+export default Login
+// export default Redux.connect()(Login)

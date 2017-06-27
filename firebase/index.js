@@ -21,5 +21,7 @@ console.log("PROJECT_ID",process.env.PROJECT_ID)
 console.log("MESSAGING_SENDER_ID",process.env.MESSAGING_SENDER_ID)
 console.log("STORAGE_BUCKET",process.env.STORAGE_BUCKET)
 
+/*Auth provider*/
+// export let githubProvider = new firebase.auth.GithubAuthProvider()
 export let firebaseRef = firebase.database().ref()
 export default firebase

@@ -1,4 +1,5 @@
 import firebase, {firebaseRef} from '../../firebase/index'
+// import firebase, {firebaseRef, githubProvider} from '../../firebase/index'
 import moment from 'moment'
 
 
@@ -104,3 +105,25 @@ export let startToggleTodo = (id, completed) => {
 		})
 	}
 }
+
+/*-------------------------------------------------------*/
+export let startLogin = () => {
+	return (dispatch, getState) => {
+		return firebase.auth().signInWithPopup(githubProvider)
+		.then( (result) => {
+
+		}, (error)=> {
+
+		})
+	}
+}
+/*-------------------------------------------------------*/
+export let startLogout = () => {
+	return (dispatch, getState) => {
+		return firebase.auth().signOut()
+		.then(()=> {
+
+		})
+	}
+}
+

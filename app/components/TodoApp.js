@@ -1,7 +1,9 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
-import uuid from 'node-uuid'
-import moment from 'moment'
+/*
+ * import * as Redux from 'react-redux'
+ * import *as actions from '../../actions'  
+*/
 
 import TodoList from './TodoList'
 import AddTodo from './AddTodo'
@@ -11,11 +13,20 @@ import TodoApi from '../api/TodoApi'
 'use strict'
 
 export default class TodoApp extends Component {
+/*--------------------------------------------------------------*/
+/*	onLogout = (e) => {
+		let {dispatch} = this.props
+		e.preventDefalt()	
+		dispatch(actions.startLogout())
+	}*/
+/*--------------------------------------------------------------*/
+	
 	render() {
 		return(
 			<div className='main-container'>
 			<div className="logout-container">
 				<a href="#" >Logout</a>
+			{/* <a href="#" onClick={this.onLogout} >Logout</a> */}
 			</div>
 				<h1>ToDO App built Redux Style</h1>
 					<div className="row">
@@ -31,3 +42,4 @@ export default class TodoApp extends Component {
 		)	
 	}
 }
+// export default Redux.connect()(TodoApp)
