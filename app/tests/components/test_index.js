@@ -343,9 +343,27 @@ describe('Actions Testing' + '\n', () => {
 			expect(response).toEqual(completedAction)
 		})	
 
-	it('Test #5: it should generate Todos action object' + '\n', () => {
+
+	// it('Test #5: should create todo and dispatch ADD_TODO' + '\n', (done) => {
+ //    const store = createMockStore({})
+ //    const todoText = 'Something Here'
+ //    /* Receiving returned method form startAddTodo 
+ //    which waits fetch from firebase using todoRef.then */
+ //     store.dispatch(actions.startAddTodo(todoText)).then(() => {
+ //        const actions = store.getActions()
+ //        expect(actions[0]).toInclude({
+ //          type: 'ADD_TODO'
+ //        })
+ //        expect(actions[0].todo).toInclude({
+ //          text: todoText
+ //        })
+ //        done()
+ //      }).catch(done)
+ //    })
+
+	it('Test #6: it should generate Todos action object' + '\n', () => {
 		let todos = [{
-			id: 111,
+			id: '111',
 			text: 'anything',
 			completed: false,
 			completedAt: undefined,
@@ -358,24 +376,7 @@ describe('Actions Testing' + '\n', () => {
 		let response =  actions.addTodos(todos)
 		expect(response).toEqual(completedAction)
 	})
-
-	it('Test #6: should create todo and dispatch ADD_TODO' + '\n', (done) => {
-    const store = createMockStore({})
-    const todoText = 'Something Here'
-    /* Receiving returned method form startAddTodo 
-    which waits fetch from firebase using todoRef.then */
-     store.dispatch(actions.startAddTodo(todoText)).then(() => {
-        const actions = store.getActions()
-        expect(actions[0]).toInclude({
-          type: 'ADD_TODO'
-        })
-        expect(actions[0].todo).toInclude({
-          text: todoText
-        })
-        done()
-      }).catch(done)
-    })
-
+	
 	describe('Firebase action todos test' + '\n', () => {
 		let testTodoRef 
 
@@ -389,7 +390,7 @@ describe('Actions Testing' + '\n', () => {
 					createdAt: 123654,
 				})
 			})
-			.then(() => { done() })
+			.then( () =>  done() )
 			.catch(done)
 		})
 

@@ -63,7 +63,7 @@ describe('Actions Testing', () => {
 
 	it('Test #5: it should generate Todos action object', () => {
 		let todos = [{
-			id: 111,
+			id: '111',
 			text: 'anything',
 			completed: false,
 			completedAt: undefined,
