@@ -11,5 +11,9 @@
 + npm
 + bootstrap 
 
-====
+----
+Deployed in Heroku to use optimized bundle doing 
+```NODE_ENV=production webpack``` 
+
+----
 Author = (SomeGuy) => { Seb }

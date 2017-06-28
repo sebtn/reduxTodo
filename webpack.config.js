@@ -2,7 +2,7 @@ let path = require('path')
 let webpack = require('webpack')
 let envFile = require('node-env-file')
 
-/* Fetching NODE_ENV */
+/* Fetching NODE_ENV from process object */
 process.env.NODE_ENV = process.env.NODE_ENV || 'development'
 /*Choose NODE_ENV file from config dir to be processed
 by plug-in*/
@@ -16,6 +16,12 @@ module.exports =  {
     './app/app.js',
   ],
   plugins: [
+    new webpack.optimize.DedupePlugin(),
+    new webpack.optimize.UglifyJsPlugin({
+        compress: {
+            warnings: false
+        }
+    }),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV),
