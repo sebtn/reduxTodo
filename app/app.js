@@ -1,29 +1,27 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import {Provider} from 'react-redux'
-import {Route, Router, 
-  IndexRoute, hashHistory, Link} from 'react-router'
+import {hashHistory} from 'react-router'
 
-import TodoApp from '././components/TodoApp'
-import Login from '././components/Login'
+import router from '././router/index'
 import  '././styles/app.scss' 
 import * as actions from '././actions/actions'
-import TodoApi from '././api/TodoApi'
-import './../firebase/index'
-
+import firebase from './../firebase/index'
 let store = require('././store/configureStore').configure()
+
+/*Redirect on login and logout*/
+firebase.auth().onAuthStateChanged( (user) => {
+  if (user) {
+    hashHistory.push('/todos')
+  } else {
+    hashHistory.push('/')
+  }
+})
 
 store.dispatch(actions.startAddTodos())
 
-'use strict'
-
 ReactDOM.render(
   <Provider store={store}>
-    <Router history={hashHistory}>
-      <Route path="/">
-        <Route path="/todos" component ={TodoApp} />
-        <IndexRoute component ={Login} />
-      </Route>
-    </Router>
+    {router}
   </Provider>,
  document.getElementById('root'))

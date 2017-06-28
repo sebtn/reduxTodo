@@ -26,7 +26,7 @@ class TodoApp extends Component {
 			<div className="logout-container">
 			<a href="#" onClick={this.onLogout} > Logout </a> 
 			</div>
-				<h1>ToDO App built Redux Style</h1>
+				<h1>TODO App built Redux Style</h1>
 					<div className="row">
 							<div className="col-sm-1 col-md-1 col-lg-3"></div>
 							<div className="col-sm-10 col-md-10 col-lg-6 list-container">
