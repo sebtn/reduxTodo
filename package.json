@@ -5,8 +5,8 @@
   "main": "webpack.config.js",
   "scripts": {
     "test": "NODE_ENV=test karma start",
-    "build": "webpack",
-    "start": "npm run build && node server.js"
+    "start": "node server.js",
+    "postinstall": "webpack -p"
   },
   "author": "",
   "license": "ISC",
