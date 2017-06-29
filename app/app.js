@@ -13,8 +13,11 @@ let store = require('././store/configureStore').configure()
 firebase.auth().onAuthStateChanged( (user) => {
   if (user) {
     hashHistory.push('/todos')
+    console.log('from app.js', user.uid)
+    store.dispatch(actions.login(user.uid))
   } else {
     hashHistory.push('/')
+    store.dispatch(actions.logout())
   }
 })
 

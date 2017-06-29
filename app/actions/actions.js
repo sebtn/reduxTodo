@@ -19,6 +19,22 @@ export let addTodo = (todo) => {
 }
 
 /*-------------------------------------------------------*/
+export let toggleShowCompleted = () => {
+	return {
+		type: "TOGGLE_SHOW_COMPLETED",
+	}
+}
+
+/*-------------------------------------------------------*/
+export let updateTodo = (id, updates) => {
+	return {
+		type: "UPDATE_TODO",
+		id,
+		updates
+	}
+}
+
+/*-------------------------------------------------------*/
 /*Used for localStorage takes an array as argument 
 prints to screen when passed through the reducer*/
 export let addTodos = (todos) => {
@@ -73,22 +89,6 @@ export let startAddTodo = (text) => {
 }
 
 /*-------------------------------------------------------*/
-export let toggleShowCompleted = () => {
-	return {
-		type: "TOGGLE_SHOW_COMPLETED",
-	}
-}
-
-/*-------------------------------------------------------*/
-export let updateTodo = (id, updates) => {
-	return {
-		type: "UPDATE_TODO",
-		id,
-		updates
-	}
-}
-
-/*-------------------------------------------------------*/
 export let startToggleTodo = (id, completed) => {
 	return (dispatch, getState) => {
 		// let todoRef = firebaseRef.child('todos/' + id)
@@ -116,6 +116,7 @@ export let startLogin = () => {
 		})
 	}
 }
+
 /*-------------------------------------------------------*/
 export let startLogout = () => {
 	return (dispatch, getState) => {
@@ -126,3 +127,17 @@ export let startLogout = () => {
 	}
 }
 
+/*-------------------------------------------------------*/
+export let login = (uid) => {
+	return {
+		type: "LOGIN",
+		uid
+	}
+}
+/*-------------------------------------------------------*/
+
+export let logout = () => {
+	return {
+		type: "LOGOUT"
+	}
+}

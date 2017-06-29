@@ -3,6 +3,7 @@ import moment from 'moment'
 
 'use strict'
 
+/*-----------------------------------------------------------------*/
 export let searchTextReducer = (state = '', action) => {
 	switch (action.type) {
 		case "SET_SEARCH_TEXT":
@@ -12,6 +13,7 @@ export let searchTextReducer = (state = '', action) => {
 	}
 }
 
+/*-----------------------------------------------------------------*/
 export let showCompletedReducer = (state = false, action) => {
 	switch (action.type) {
 		case "TOGGLE_SHOW_COMPLETED":
@@ -21,6 +23,7 @@ export let showCompletedReducer = (state = false, action) => {
 	}
 }			
 
+/*-----------------------------------------------------------------*/
 export let todosReducer = (state = [],  action) => {
 	switch (action.type) {
 		case "ADD_TODO":
@@ -42,11 +45,41 @@ export let todosReducer = (state = [],  action) => {
 				}
 			})
 		case "ADD_TODOS":
-		return [
-			...state,
-			...action.todos
-		]			
+			return [
+				...state,
+				...action.todos
+			]			
 		default: 
 			return state			
 	}
 }				
+
+/*-----------------------------------------------------------------*/
+export let authReducer = (state = {}, action) => {
+	switch (action.type) {
+		case "LOGIN":
+			/*return Object.assign({}, state, {
+				uid: action.uid
+      })*/
+      return {
+      	...state,
+      	uid: action.uid
+      }
+		case "LOGOUT": 
+			return {}
+		default:
+			return state
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+

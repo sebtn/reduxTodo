@@ -5,13 +5,15 @@ import thunk from 'redux-thunk'
 
 import {searchTextReducer,
 				showCompletedReducer, 
-				todosReducer} from './../reducers/reducers'
+				todosReducer,
+				authReducer} from './../reducers/reducers'
 
 export let configure = (initialState = {}) => {
 	let reducer = redux.combineReducers({
 		searchText: searchTextReducer,
 		showCompleted: showCompletedReducer,
-		todos: todosReducer
+		todos: todosReducer,
+		auth: authReducer
 	})
 	 let store = redux.createStore(reducer, initialState, redux.compose(
 	 	redux.applyMiddleware(thunk),

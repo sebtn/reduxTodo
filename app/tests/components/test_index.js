@@ -344,22 +344,40 @@ describe('Actions Testing' + '\n', () => {
 		})	
 
 
-	// it('Test #5: should create todo and dispatch ADD_TODO' + '\n', (done) => {
- //    const store = createMockStore({})
- //    const todoText = 'Something Here'
- //    /* Receiving returned method form startAddTodo 
- //    which waits fetch from firebase using todoRef.then */
- //     store.dispatch(actions.startAddTodo(todoText)).then(() => {
- //        const actions = store.getActions()
- //        expect(actions[0]).toInclude({
- //          type: 'ADD_TODO'
- //        })
- //        expect(actions[0].todo).toInclude({
- //          text: todoText
- //        })
- //        done()
- //      }).catch(done)
- //    })
+	it('Test #5: should create todo and dispatch ADD_TODO' + '\n', (done) => {
+    const store = createMockStore({})
+    const todoText = 'Something Here'
+    /* Receiving returned method form startAddTodo 
+    which waits fetch from firebase using todoRef.then */
+     store.dispatch(actions.startAddTodo(todoText)).then(() => {
+        const actions = store.getActions()
+        expect(actions[0]).toInclude({
+          type: 'ADD_TODO'
+        })
+        expect(actions[0].todo).toInclude({
+          text: todoText
+        })
+        done()
+      }).catch(done)
+    })
+
+	it('Test #7: it should generate login action object' + '\n', () => {
+		let uid = '123'
+		let completedAction = {
+			type: "LOGIN",
+			uid
+		}
+		let response =  actions.login(completedAction.uid)
+		expect(response).toEqual(completedAction)
+	})	
+
+	it('Test #8: it should generate logout action object' + '\n', () => {
+		let completedAction = {
+			type: "LOGOUT",
+		}
+		let response =  actions.logout(completedAction)
+		expect(response).toEqual(completedAction)
+	})
 
 	it('Test #6: it should generate Todos action object' + '\n', () => {
 		let todos = [{
@@ -532,6 +550,25 @@ describe('Reducers testing' + '\n', () => {
 
 			expect(response.length).toEqual(1)
 			expect(response[0]).toEqual(todos[0])
+		})
+
+		it('Test #4: it should login using uid when action called' + '\n', () => {
+			let action = {
+				type: "LOGIN",
+				uid: '111'
+			}
+			let response = reducers.authReducer( df({}), df(action) )
+
+			expect(response.uid).toEqual(action.uid)
+		})
+
+		it('Test #5: it should logout not using uid when action called', () => {
+			let action = {
+				type: "LOGOUT",
+			}
+			let response = reducers.authReducer( df({}), df(action) )
+
+			expect(response.uid).toNotExist()
 		})
 
 	})

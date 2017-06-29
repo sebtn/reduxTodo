@@ -5,6 +5,7 @@ import firebase from '../../firebase/index'
 import TodoApp from './../components/TodoApp'
 import Login from './../components/Login'
 
+/*-------------------------------------------------------*/
 /*Middlewares: manage root private and public*/
 let requireLogin = (nextState, replace, next) => {
   if (!firebase.auth().currentUser) {
@@ -13,6 +14,7 @@ let requireLogin = (nextState, replace, next) => {
   next()
 }
 
+/*-------------------------------------------------------*/
 let redirectIfLogged = (nextState, replace, next) => {
   if (firebase.auth().currentUser) {
     replace('/todos')
@@ -20,6 +22,7 @@ let redirectIfLogged = (nextState, replace, next) => {
   next()
 }
 
+/*-------------------------------------------------------*/
 export default (
   <Router history={hashHistory}>
     <Route path="/">

@@ -95,6 +95,25 @@ describe('Reducers testing', () => {
 			expect(response[0]).toEqual(todos[0])
 		})
 
+		it('Test #4: it should login using uid', () => {
+			let action = {
+				type: "LOGIN",
+				uid: '111'
+			}
+			let response = reducers.authReducer( df({}), df(action) )
+
+			expect(response.uid).toEqual(action.uid)
+		})
+
+		it('Test #5: it should logout not using uid when action', () => {
+			let action = {
+				type: "LOGOUT",
+			}
+			let response = reducers.authReducer( df({}), df(action) )
+
+			expect(response.uid).toNotExist()
+		})
+
 	})
 
 })

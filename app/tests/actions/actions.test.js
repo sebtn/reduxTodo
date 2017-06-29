@@ -94,6 +94,24 @@ describe('Actions Testing', () => {
 		}).catch(done)
 	})
 
+	it('Test #7: it should generate login action object' + '\n', () => {
+		let uid = '123'
+		let completedAction = {
+			type: "LOGIN",
+			uid
+		}
+		let response =  actions.login(completedAction.uid)
+		expect(response).toEqual(completedAction)
+	})	
+
+	it('Test #8: it should generate logout action object' + '\n', () => {
+		let completedAction = {
+			type: "LOGOUT",
+		}
+		let response =  actions.logout(completedAction)
+		expect(response).toEqual(completedAction)
+	})
+
 	describe('Firebase action todos test' + '\n', () => {
 		let testTodoRef 
 		beforeEach((done) => {
