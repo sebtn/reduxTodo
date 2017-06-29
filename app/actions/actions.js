@@ -95,7 +95,7 @@ export let startToggleTodo = (id, completed) => {
 	return (dispatch, getState) => {
 		let uid = getState().auth.uid
 		// let todoRef = firebaseRef.child('todos/' + id)
-		let todoRef = firebaseRef.child(`/users/${uid}todos/${id}`)
+		let todoRef = firebaseRef.child(`/users/${uid}/todos/${id}`)
 		let updates = {
 			completed,
 			completedAt:completed ? moment().unix() : null 	

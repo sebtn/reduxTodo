@@ -48,7 +48,9 @@ export let todosReducer = (state = [],  action) => {
 			return [
 				...state,
 				...action.todos
-			]			
+			]				
+		case "LOGOUT":
+			return []			
 		default: 
 			return state			
 	}
@@ -58,11 +60,7 @@ export let todosReducer = (state = [],  action) => {
 export let authReducer = (state = {}, action) => {
 	switch (action.type) {
 		case "LOGIN":
-			/*return Object.assign({}, state, {
-				uid: action.uid
-      })*/
       return {
-      	...state,
       	uid: action.uid
       }
 		case "LOGOUT": 

@@ -93,6 +93,24 @@ describe('Reducers testing', () => {
 
 			expect(response.length).toEqual(1)
 			expect(response[0]).toEqual(todos[0])
+		})		
+
+		it('Test #4: it should remove existing todos when logout is called', () => {
+			let todos = [{
+				id: 111,
+				text: 'anything',
+				completed: false,
+				completedAt: undefined,
+				createdAt: 15000,
+			}]
+			let completedAction = {
+				type: "LOGOUT",
+			}
+
+			let response = reducers.todosReducer( df([]), df(action) )
+
+			expect(response.length).toEqual(0)
+			expect(response[0]).toNotExist()
 		})
 
 	})
