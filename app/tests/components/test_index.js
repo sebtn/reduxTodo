@@ -484,7 +484,7 @@ describe('Reducers testing' + '\n', () => {
 
 	})
 
-	describe('addTodoReducer Testing' + '\n', () => {
+	describe('addTodoReducer testing' + '\n', () => {
 
 		it('Test #1: it should add todo when action called' + '\n', () => {
 			let action = {
@@ -554,7 +554,7 @@ describe('Reducers testing' + '\n', () => {
 
 	})
 
-	describe('Testing auth reducers' + '\n', () => {
+	describe('authReducer testing' + '\n', () => {
 
 		it('Test #4: it should login using uid' + '\n', () => {
 			let action = {

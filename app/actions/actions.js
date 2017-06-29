@@ -47,7 +47,8 @@ export let addTodos = (todos) => {
 /*-------------------------------------------------------*/
 export let startAddTodos = () => {
 	return (dispatch, getState) => {
-		let todosRef = firebaseRef.child('todos')
+		let uid = getState().auth.uid
+		let todosRef = firebaseRef.child(`users/${uid}/todos`)
 		return todosRef.once('value').then( (snapshot) => {
 			let parsedTodos = []
 			let todos = snapshot.val() || {}
@@ -69,13 +70,14 @@ export let startAddTodo = (text) => {
 	/*dispatch actions after the data is saved in db, 
 	get current state of store*/
 	return (dispatch, getState) => {
+		let uid = getState().auth.uid
 		let todo = {
 			text: text,
 			completed: false, 
 			createdAt: moment().unix(), 
 			completedAt: null 
 		}		
-		let todoRef = firebaseRef.child('todos').push(todo)
+		let todoRef = firebaseRef.child(`users/${uid}/todos`).push(todo)
 		/*Calling dispatch updates the store, should explicitly 
 		return, else the test will not receive the promise, 
 		returning undefined even though method works */
@@ -91,8 +93,9 @@ export let startAddTodo = (text) => {
 /*-------------------------------------------------------*/
 export let startToggleTodo = (id, completed) => {
 	return (dispatch, getState) => {
+		let uid = getState().auth.uid
 		// let todoRef = firebaseRef.child('todos/' + id)
-		let todoRef = firebaseRef.child(`todos/${id}`)
+		let todoRef = firebaseRef.child(`/users/${uid}todos/${id}`)
 		let updates = {
 			completed,
 			completedAt:completed ? moment().unix() : null 	

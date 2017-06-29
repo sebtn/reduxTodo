@@ -14,13 +14,13 @@ firebase.auth().onAuthStateChanged( (user) => {
   if (user) {
     hashHistory.push('/todos')
     store.dispatch(actions.login(user.uid))
+    store.dispatch(actions.startAddTodos())
   } else {
     hashHistory.push('/')
     store.dispatch(actions.logout())
   }
 })
 
-store.dispatch(actions.startAddTodos())
 
 ReactDOM.render(
   <Provider store={store}>
