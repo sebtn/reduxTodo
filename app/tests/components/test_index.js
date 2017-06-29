@@ -562,7 +562,7 @@ describe('Reducers testing' + '\n', () => {
 			expect(response.uid).toEqual(action.uid)
 		})
 
-		it('Test #5: it should logout not using uid when action called', () => {
+		it('Test #5: it should logout not using uid when action called' + '\n', () => {
 			let action = {
 				type: "LOGOUT",
 			}

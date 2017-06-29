@@ -12,8 +12,6 @@ let store = require('././store/configureStore').configure()
 /*Redirect on login and logout*/
 firebase.auth().onAuthStateChanged( (user) => {
   if (user) {
-    hashHistory.push('/todos')
-    console.log('from app.js', user.uid)
     store.dispatch(actions.login(user.uid))
   } else {
     hashHistory.push('/')

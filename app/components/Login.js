@@ -16,10 +16,10 @@ class Login extends Component {
   render() {
     return(
       <div className="login-container">
-        <h1 className="page-title">Todo App Redux Style</h1>
         <div className="row">
           <div className="col-sm-1 col-md-2 col-lg-4"></div>
           <div className="col-sm-10 col-md-6 col-lg-4">
+            <h1 className="page-title">Todo App Redux Style</h1>
             <div className="card">
               <div className="card-header">
                 <h3>Log In</h3>
