@@ -95,6 +95,10 @@ describe('Reducers testing', () => {
 			expect(response[0]).toEqual(todos[0])
 		})
 
+	})
+
+	describe('Testing auth reducers' + '\n', () => {
+
 		it('Test #4: it should login using uid', () => {
 			let action = {
 				type: "LOGIN",
@@ -113,7 +117,7 @@ describe('Reducers testing', () => {
 
 			expect(response.uid).toNotExist()
 		})
-
+		
 	})
 
 })

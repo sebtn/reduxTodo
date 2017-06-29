@@ -552,25 +552,32 @@ describe('Reducers testing' + '\n', () => {
 			expect(response[0]).toEqual(todos[0])
 		})
 
-		it('Test #4: it should login using uid when action called' + '\n', () => {
+	})
+
+	describe('Testing auth reducers' + '\n', () => {
+
+		it('Test #4: it should login using uid' + '\n', () => {
 			let action = {
 				type: "LOGIN",
 				uid: '111'
 			}
-			let response = reducers.authReducer( df({}), df(action) )
+			let response = reducers.authReducer( undefined, df(action) )
 
-			expect(response.uid).toEqual(action.uid)
+			expect(response).toEqual({
+				uid: action.uid 
+			})
 		})
 
-		it('Test #5: it should logout not using uid when action called' + '\n', () => {
+		it('Test #5: it should logout not using uid when action' + '\n' , () => {
+			let toDelete = '111'
 			let action = {
 				type: "LOGOUT",
 			}
-			let response = reducers.authReducer( df({}), df(action) )
+			let response = reducers.authReducer( df(toDelete), df(action) )
 
-			expect(response.uid).toNotExist()
+			expect(response).toEqual({})
 		})
-
+		
 	})
 
 })
