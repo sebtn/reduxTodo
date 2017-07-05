@@ -22,6 +22,7 @@ firebase.auth().onAuthStateChanged( (user) => {
 })
 
 
+
 ReactDOM.render(
   <Provider store={store}>
     {router}

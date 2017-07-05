@@ -540,6 +540,7 @@ describe('Reducers testing' + '\n', () => {
 				expect(response[0].completedAt).toEqual(updates.completedAt)
 				expect(response[0].text).toEqual(todos[0].text)
 			})
+			
 		it('Test #3: it should add existing todos' + '\n', () => {
 			let todos = [{
 				id: 111,
