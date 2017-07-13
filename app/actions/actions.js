@@ -113,9 +113,9 @@ export let startLogin = () => {
 	return (dispatch, getState) => {
 		return firebase.auth().signInWithPopup(githubProvider)
 		.then( (result) => {
-			console.log('Auth works! ', result)
+			// console.log('Auth works! ', result)
 		}, (error)=> {
-			console.log('opps! ',error)
+			// console.log('opps! ',error)
 		})
 	}
 }
@@ -125,7 +125,7 @@ export let startLogout = () => {
 	return (dispatch, getState) => {
 		return firebase.auth().signOut()
 		.then(()=> {
-			console.log('Looged out!')
+			// console.log('Looged out!')
 		})
 	}
 }
